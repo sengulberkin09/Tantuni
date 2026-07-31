@@ -8,6 +8,7 @@ document.addEventListener("DOMContentLoaded", function () {
   initOrderDropdowns();
   initPageTransitions();
   initMenuTabs();
+  initGalleryLightbox();
 });
 
 /* ---------- Mobil hamburger menü ---------- */
@@ -86,6 +87,43 @@ function initPageTransitions() {
         window.location.href = href;
       }, 220);
     });
+  });
+}
+
+/* ---------- Galeri lightbox (görsele tıklayınca büyüt) ---------- */
+function initGalleryLightbox() {
+  var lightbox = document.getElementById("lightbox");
+  var images = document.querySelectorAll(".gallery-tile img");
+  if (!lightbox || !images.length) return;
+
+  var lightboxImg = lightbox.querySelector(".lightbox-img");
+  var lightboxCaption = lightbox.querySelector(".lightbox-caption");
+  var closeBtn = lightbox.querySelector(".lightbox-close");
+
+  function open(img) {
+    lightboxImg.src = img.currentSrc || img.src;
+    lightboxImg.alt = img.alt;
+    var caption = img.closest(".gallery-tile").querySelector(".gallery-caption");
+    lightboxCaption.textContent = caption ? caption.textContent : img.alt;
+    lightbox.classList.add("open");
+    document.body.style.overflow = "hidden";
+  }
+
+  function close() {
+    lightbox.classList.remove("open");
+    document.body.style.overflow = "";
+  }
+
+  images.forEach(function (img) {
+    img.addEventListener("click", function () { open(img); });
+  });
+
+  closeBtn.addEventListener("click", close);
+  lightbox.addEventListener("click", function (e) {
+    if (e.target === lightbox) close();
+  });
+  document.addEventListener("keydown", function (e) {
+    if (e.key === "Escape") close();
   });
 }
 
