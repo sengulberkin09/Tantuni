@@ -300,6 +300,7 @@ body.page-exit {
   .nav-links a { padding: 12px 10px; }
   .nav-links a.active::after { left: 10px; right: 10px; }
   .nav-toggle { display: inline-flex; }
+  .nav-actions .order-trigger { display: none; }
 }
 
 /* ---------- Hero ---------- */
@@ -314,12 +315,21 @@ body.page-exit {
 .hero-photo {
   position: absolute;
   inset: 0;
-  background:
-    linear-gradient(180deg, rgba(28,20,16,0.55) 0%, rgba(18,13,10,0.88) 100%),
-    radial-gradient(ellipse at 50% 0%, rgba(232,93,44,0.15), transparent 60%),
-    url('../images/hero-bg.webp');
+  background: url('../images/hero-bg.webp');
   background-size: cover;
   background-position: center 35%;
+}
+.hero-photo::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background:
+    linear-gradient(180deg, rgba(28,20,16,0.55) 0%, rgba(18,13,10,0.88) 100%),
+    radial-gradient(ellipse at 50% 0%, rgba(232,93,44,0.15), transparent 60%);
+}
+@media (max-width: 768px) {
+  .hero { padding: 56px 20px 64px; }
+  .hero-photo { background-position: center 40%; }
 }
 
 .ribbon {
