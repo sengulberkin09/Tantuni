@@ -359,6 +359,15 @@ body.page-exit {
 @media (max-width: 700px) {
   .ribbon-4, .ribbon-5, .ribbon-6 { display: none; }
 }
+@media (min-width: 900px) {
+  .ribbon { opacity: 0.5; }
+  .ribbon-1 { width: 74px; }
+  .ribbon-2 { width: 48px; }
+  .ribbon-3 { width: 88px; }
+  .ribbon-4 { width: 54px; }
+  .ribbon-5 { width: 76px; }
+  .ribbon-6 { width: 44px; }
+}
 @media (prefers-reduced-motion: reduce) {
   .ribbon { animation: none; }
 }
