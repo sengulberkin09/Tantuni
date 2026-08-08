@@ -175,6 +175,47 @@ body.page-exit {
 .order-menu .brand-dot.yemeksepeti { background: #fa0050; }
 .order-menu .brand-dot.trendyol { background: #f27a1a; }
 
+/* Şube seçim / platform seçim panelleri */
+.order-panel-branch,
+.order-panel-platform {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+.order-branch-btn {
+  display: flex;
+  align-items: center;
+  padding: 12px 14px;
+  border: none;
+  background: none;
+  border-radius: var(--radius-sm);
+  font: inherit;
+  font-weight: 600;
+  color: inherit;
+  text-align: left;
+  cursor: pointer;
+  transition: background var(--transition-fast);
+}
+.order-branch-btn:hover { background: var(--color-cream-soft); }
+.order-back-btn {
+  display: flex;
+  align-items: center;
+  padding: 8px 14px;
+  margin-bottom: 2px;
+  border: none;
+  background: none;
+  border-bottom: 1px solid var(--color-cream-soft);
+  font: inherit;
+  font-size: 0.85em;
+  font-weight: 600;
+  color: inherit;
+  opacity: 0.75;
+  text-align: left;
+  cursor: pointer;
+  transition: opacity var(--transition-fast);
+}
+.order-back-btn:hover { opacity: 1; }
+
 /* Hero içindeki dropdown ortalı açılsın */
 .hero-order .order-menu {
   right: auto;

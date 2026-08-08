@@ -6,6 +6,7 @@
 document.addEventListener("DOMContentLoaded", function () {
   initNavToggle();
   initOrderDropdowns();
+  initOrderBranchSteps();
   initPageTransitions();
   initMenuTabs();
   initGalleryLightbox();
@@ -63,6 +64,56 @@ function initOrderDropdowns() {
 
   document.addEventListener("keydown", function (e) {
     if (e.key === "Escape") closeAll(null);
+  });
+}
+
+/* ---------- Sipariş Ver menüsü: şube seç -> platform seç ---------- */
+function initOrderBranchSteps() {
+  var menus = document.querySelectorAll(".order-menu");
+
+  function resetMenu(menu) {
+    var branchPanel = menu.querySelector('[data-panel="branch"]');
+    var platformPanels = menu.querySelectorAll('[data-panel="platform"]');
+    if (branchPanel) branchPanel.hidden = false;
+    platformPanels.forEach(function (panel) {
+      panel.hidden = true;
+    });
+  }
+
+  menus.forEach(function (menu) {
+    var branchPanel = menu.querySelector('[data-panel="branch"]');
+    if (!branchPanel) return;
+
+    branchPanel.querySelectorAll(".order-branch-btn").forEach(function (btn) {
+      btn.addEventListener("click", function (e) {
+        e.stopPropagation();
+        var branch = btn.getAttribute("data-branch");
+        var targetPanel = menu.querySelector('[data-panel="platform"][data-branch="' + branch + '"]');
+        if (!targetPanel) return;
+        branchPanel.hidden = true;
+        menu.querySelectorAll('[data-panel="platform"]').forEach(function (panel) {
+          panel.hidden = panel !== targetPanel;
+        });
+      });
+    });
+
+    menu.querySelectorAll(".order-back-btn").forEach(function (btn) {
+      btn.addEventListener("click", function (e) {
+        e.stopPropagation();
+        resetMenu(menu);
+      });
+    });
+  });
+
+  // Menü her kapandığında (dropdown aç/kapa mantığı) şube seçim ekranına dön
+  var observer = new MutationObserver(function (mutations) {
+    mutations.forEach(function (mutation) {
+      var menu = mutation.target;
+      if (!menu.classList.contains("open")) resetMenu(menu);
+    });
+  });
+  menus.forEach(function (menu) {
+    observer.observe(menu, { attributes: true, attributeFilter: ["class"] });
   });
 }
 
