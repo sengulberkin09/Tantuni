@@ -1,0 +1,401 @@
+/* ==========================================================================
+   QR Menü — "Köz Ateşi" teması
+   Renkler ve fontlar ana sitenin css/style.css dosyasından birebir alındı.
+   ========================================================================== */
+
+:root {
+  /* Marka renkleri — temadan bağımsız */
+  --flame: #e85d2c;
+  --flame-dark: #c8481e;
+  --gold: #f2b84b;
+
+  /* Aydınlık tema */
+  --zemin: #f3e9dd;
+  --zemin-yumusak: #ece0d1;
+  --kart: #ffffff;
+  --yazi: #2a1d14;
+  --sonuk: #6b5a4c;
+  --cizgi: rgba(42, 29, 20, 0.12);
+  --golge: 0 6px 18px rgba(28, 20, 16, 0.10);
+
+  /* Açık zeminde metin için koyu ton kullanılıyor: #e85d2c beyaz üzerinde
+     3.48:1 ile WCAG AA'nın altında kalıyor, #c8481e 4.77:1 ile geçiyor.
+     Ana site de aynı ayrımı yapıyor (fiyatlar flame-dark, dolgular flame). */
+  --vurgu: var(--flame-dark);
+
+  --font-baslik: "Fraunces", Georgia, "Times New Roman", serif;
+  --font-govde: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+
+  --yaricap-sm: 8px;
+  --yaricap-md: 14px;
+}
+
+/* Elle koyu tema seçildiğinde */
+:root[data-tema="koyu"] {
+  --zemin: #1c1410;
+  --zemin-yumusak: #241a14;
+  --kart: #241a14;
+  --yazi: #f3e9dd;
+  --sonuk: #c9b8a8;
+  --cizgi: rgba(243, 233, 221, 0.14);
+  --golge: 0 6px 18px rgba(0, 0, 0, 0.35);
+  /* Koyu zeminde ters çevriliyor: #c8481e sadece 3.57:1, #e85d2c 4.89:1. */
+  --vurgu: var(--flame);
+}
+
+/* JS kapalıysa boyama öncesi script çalışmaz; sistem tercihi devreye girsin. */
+@media (prefers-color-scheme: dark) {
+  :root:not([data-tema="acik"]) {
+    --zemin: #1c1410;
+    --zemin-yumusak: #241a14;
+    --kart: #241a14;
+    --yazi: #f3e9dd;
+    --sonuk: #c9b8a8;
+    --cizgi: rgba(243, 233, 221, 0.14);
+    --golge: 0 6px 18px rgba(0, 0, 0, 0.35);
+    --vurgu: var(--flame);
+  }
+}
+
+*, *::before, *::after { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  background: var(--zemin);
+  color: var(--yazi);
+  font-family: var(--font-govde);
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+  overflow-x: hidden;
+}
+
+img { max-width: 100%; display: block; }
+a { color: inherit; text-decoration: none; }
+button { font: inherit; cursor: pointer; }
+h1, h2 { font-family: var(--font-baslik); font-weight: 700; line-height: 1.15; margin: 0; }
+
+.kabuk {
+  max-width: 640px;
+  margin: 0 auto;
+  padding: 0 16px 40px;
+}
+
+/* ---------- JS kapalı uyarısı ---------- */
+.js-kapali {
+  margin: 24px 0;
+  padding: 16px;
+  background: var(--kart);
+  border: 1px solid var(--cizgi);
+  border-left: 4px solid var(--vurgu);
+  border-radius: var(--yaricap-md);
+  font-size: 14px;
+}
+
+/* ---------- Başlık ---------- */
+.baslik { padding: 16px 0 12px; }
+
+.baslik-ust {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  margin-bottom: 12px;
+}
+
+.logo {
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+.sube-baslik {
+  font-size: clamp(20px, 5.5vw, 26px);
+  letter-spacing: -0.01em;
+}
+
+.sube-baslik::after {
+  content: "";
+  display: block;
+  width: 52px;
+  height: 3px;
+  margin-top: 10px;
+  border-radius: 2px;
+  background: linear-gradient(90deg, var(--flame), var(--gold));
+}
+
+/* ---------- Tercih kontrolleri ---------- */
+.tercihler { display: flex; align-items: center; gap: 8px; }
+
+.dil-secici {
+  display: flex;
+  background: var(--zemin-yumusak);
+  border: 1px solid var(--cizgi);
+  border-radius: 999px;
+  padding: 0;
+}
+
+.dil-dugme {
+  min-width: 44px;
+  min-height: 44px;
+  padding: 0 12px;
+  border: 0;
+  border-radius: 999px;
+  background: transparent;
+  color: var(--sonuk);
+  font-size: 13px;
+  font-weight: 600;
+  transition: background 160ms ease, color 160ms ease;
+}
+
+.dil-dugme[aria-pressed="true"] {
+  background: var(--flame-dark);
+  color: #fff;
+}
+
+.tema-dugme {
+  display: grid;
+  place-items: center;
+  width: 44px;
+  height: 44px;
+  border: 1px solid var(--cizgi);
+  border-radius: 999px;
+  background: var(--zemin-yumusak);
+  color: var(--yazi);
+  transition: color 160ms ease, border-color 160ms ease;
+}
+
+.tema-dugme:hover { color: var(--vurgu); border-color: var(--vurgu); }
+
+.dil-dugme:focus-visible,
+.tema-dugme:focus-visible {
+  outline: 2px solid var(--vurgu);
+  outline-offset: 2px;
+}
+
+/* ---------- Kategori sekmeleri ---------- */
+.sekmeler {
+  position: sticky;
+  top: 0;
+  z-index: 10;
+  display: flex;
+  gap: 6px;
+  padding: 10px 0;
+  background: var(--zemin);
+  border-bottom: 1px solid var(--cizgi);
+  overflow-x: auto;
+}
+
+.sekme {
+  flex: 1 0 auto;
+  min-height: 44px;
+  padding: 0 14px;
+  border: 1px solid var(--cizgi);
+  border-radius: 999px;
+  background: var(--kart);
+  color: var(--sonuk);
+  font-size: 13.5px;
+  font-weight: 600;
+  white-space: nowrap;
+  transition: background 160ms ease, color 160ms ease, border-color 160ms ease;
+}
+
+.sekme[aria-selected="true"] {
+  background: var(--flame-dark);
+  border-color: var(--flame-dark);
+  color: #fff;
+}
+
+.sekme:focus-visible {
+  outline: 2px solid var(--vurgu);
+  outline-offset: 2px;
+}
+
+/* ---------- Paneller ---------- */
+/* data-aktif yalnızca JS çalışınca konur; yokken üç panel de görünür. */
+.paneller[data-aktif] .panel { display: none; }
+.paneller[data-aktif="et"] #panel-et,
+.paneller[data-aktif="tavuk"] #panel-tavuk,
+.paneller[data-aktif="icecek"] #panel-icecek { display: grid; }
+
+.panel { padding-top: 16px; }
+
+.panel:focus-visible {
+  outline: 2px solid var(--vurgu);
+  outline-offset: 2px;
+}
+
+#panel-et, #panel-tavuk {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 12px;
+}
+
+#panel-icecek {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 10px;
+}
+
+@media (min-width: 560px) {
+  #panel-icecek { grid-template-columns: repeat(3, 1fr); }
+}
+
+/* ---------- Tantuni ürün kartı ---------- */
+.urun-karti {
+  display: flex;
+  gap: 14px;
+  align-items: flex-start;
+  padding: 14px;
+  background: var(--kart);
+  border: 1px solid var(--cizgi);
+  border-radius: var(--yaricap-md);
+  box-shadow: var(--golge);
+}
+
+.urun-gorsel {
+  width: 92px;
+  height: 92px;
+  flex: 0 0 92px;
+  object-fit: cover;
+  border-radius: var(--yaricap-sm);
+}
+
+.urun-govde { min-width: 0; flex: 1; }
+
+.urun-ad { font-size: 17px; margin-bottom: 2px; }
+
+.urun-aciklama {
+  margin: 0 0 10px;
+  font-size: 13px;
+  line-height: 1.4;
+  color: var(--sonuk);
+}
+
+.porsiyonlar { display: flex; flex-wrap: wrap; gap: 8px; }
+
+.porsiyon {
+  display: inline-flex;
+  align-items: baseline;
+  gap: 6px;
+  padding: 6px 10px;
+  background: var(--zemin-yumusak);
+  border: 1px solid var(--cizgi);
+  border-radius: 999px;
+  white-space: nowrap;
+}
+
+.porsiyon-etiket { font-size: 11.5px; color: var(--sonuk); }
+
+.porsiyon-fiyat {
+  font-family: var(--font-baslik);
+  font-size: 15px;
+  font-weight: 700;
+  color: var(--vurgu);
+}
+
+/* ---------- İçecek kartı ---------- */
+.icecek-karti {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+  padding: 12px 8px;
+  background: var(--kart);
+  border: 1px solid var(--cizgi);
+  border-radius: var(--yaricap-md);
+  box-shadow: var(--golge);
+  text-align: center;
+}
+
+.icecek-gorsel { width: 56px; height: 56px; object-fit: contain; }
+
+.icecek-ad { font-size: 13px; font-weight: 500; line-height: 1.25; }
+
+.icecek-fiyat {
+  font-family: var(--font-baslik);
+  font-size: 15px;
+  font-weight: 700;
+  color: var(--vurgu);
+}
+
+/* ---------- Alt bilgi ---------- */
+.alt-bilgi {
+  margin-top: 28px;
+  padding-top: 20px;
+  border-top: 1px solid var(--cizgi);
+}
+
+.sube-bilgi { margin: 0; }
+
+.sube-bilgi dt {
+  font-family: var(--font-baslik);
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--vurgu);
+  margin-top: 14px;
+}
+
+.sube-bilgi dd { margin: 4px 0 0; font-size: 15px; }
+
+.sube-bilgi a {
+  display: inline-flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px;
+  min-height: 44px;
+}
+
+.sube-bilgi a:hover { color: var(--vurgu); }
+
+.adres-metni { flex: 1 1 auto; }
+
+.yol-tarifi {
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--vurgu);
+  border-bottom: 1px solid currentColor;
+}
+
+.fiyat-tarihi { margin: 22px 0 0; font-size: 12px; color: var(--sonuk); }
+
+/* ---------- Şube seçim sayfası ---------- */
+.sube-secim { padding-top: 48px; text-align: center; }
+
+.secim-logo { width: 72px; height: 72px; margin: 0 auto 16px; }
+
+.secim-baslik { font-size: clamp(22px, 6vw, 28px); }
+
+.secim-alt { margin: 8px 0 28px; color: var(--sonuk); font-size: 14px; }
+
+.secim-listesi { display: grid; gap: 12px; text-align: left; }
+
+.secim-karti {
+  display: grid;
+  gap: 4px;
+  padding: 18px;
+  background: var(--kart);
+  border: 1px solid var(--cizgi);
+  border-left: 4px solid var(--vurgu);
+  border-radius: var(--yaricap-md);
+  box-shadow: var(--golge);
+  transition: transform 160ms ease;
+}
+
+.secim-karti:hover { transform: translateY(-2px); }
+
+.secim-karti:focus-visible {
+  outline: 2px solid var(--vurgu);
+  outline-offset: 2px;
+}
+
+.secim-sube-ad {
+  font-family: var(--font-baslik);
+  font-size: 19px;
+  font-weight: 700;
+}
+
+.secim-sube-adres { font-size: 13px; color: var(--sonuk); }
+.secim-sube-saat { font-size: 13px; color: var(--vurgu); font-weight: 600; }
