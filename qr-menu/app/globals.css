@@ -392,3 +392,57 @@ h1, h2, h3 {
   font-size: 12px;
   color: var(--sonuk);
 }
+
+/* ---------- Şube seçim sayfası ---------- */
+.sube-secim {
+  padding-top: 48px;
+  text-align: center;
+}
+
+.secim-logo {
+  width: 72px;
+  height: 72px;
+  margin: 0 auto 16px;
+}
+
+.secim-baslik { font-size: clamp(22px, 6vw, 28px); }
+
+.secim-alt {
+  margin: 8px 0 28px;
+  color: var(--sonuk);
+  font-size: 14px;
+}
+
+.secim-listesi {
+  display: grid;
+  gap: 12px;
+  text-align: left;
+}
+
+.secim-karti {
+  display: grid;
+  gap: 4px;
+  padding: 18px;
+  background: var(--kart);
+  border: 1px solid var(--cizgi);
+  border-left: 4px solid var(--flame);
+  border-radius: var(--yaricap-md);
+  box-shadow: var(--golge);
+  transition: transform 160ms ease, border-color 160ms ease;
+}
+
+.secim-karti:hover { transform: translateY(-2px); }
+
+.secim-karti:focus-visible {
+  outline: 2px solid var(--flame);
+  outline-offset: 2px;
+}
+
+.secim-sube-ad {
+  font-family: var(--font-baslik);
+  font-size: 19px;
+  font-weight: 700;
+}
+
+.secim-sube-adres { font-size: 13px; color: var(--sonuk); }
+.secim-sube-saat { font-size: 13px; color: var(--flame); font-weight: 600; }
