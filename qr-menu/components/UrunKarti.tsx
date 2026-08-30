@@ -25,12 +25,12 @@ export function UrunKarti({ urun, dil, oncelikli = false }: Props) {
       />
 
       <div className="urun-govde">
-        <h3 className="urun-ad">{urun.ad}</h3>
+        <h2 className="urun-ad">{urun.ad}</h2>
         <p className="urun-aciklama">{urun.aciklama[dil]}</p>
 
         <div className="porsiyonlar">
-          {urun.porsiyonlar.map((porsiyon) => (
-            <span className="porsiyon" key={porsiyon.etiket.tr}>
+          {urun.porsiyonlar.map((porsiyon, sira) => (
+            <span className="porsiyon" key={sira}>
               <span className="porsiyon-etiket">{porsiyon.etiket[dil]}</span>
               <span className="porsiyon-fiyat">{`₺${porsiyon.fiyat}`}</span>
             </span>
