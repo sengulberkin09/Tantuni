@@ -42,21 +42,43 @@ Takıldığını düşünüp yarıda kesmeyin.
 
 ## Fiyat veya ürün güncelleme
 
-1. `data/menu.ts` içinde fiyatı/ürünü değiştir — burası tek kaynak,
+1. `qr-menu/data/menu.ts` içinde fiyatı/ürünü değiştirin — burası tek kaynak,
    her iki şube sayfasına da otomatik yansır.
-2. Fiyat değişim tarihini güncelle: `FIYAT_DEGISIM_TARIHI`.
-3. `npm run build` — testler önce çalışır, bozuk veri build'i durdurur.
-   Build çıktısı otomatik olarak repo kökündeki `qr/` klasörüne kopyalanır.
-4. `qr/` klasörünü commit'le ve push'la.
+2. Fiyat değişim tarihini güncelleyin: `FIYAT_DEGISIM_TARIHI` (aynı dosyada).
+3. PowerShell'de, `qr-menu/` klasöründen build alın. Testler önce çalışır,
+   bozuk veri build'i durdurur. Çıktı otomatik olarak repo kökündeki `qr/`
+   klasörüne kopyalanır:
 
-**Önemli:** `qr/` klasörü build çıktısıdır, elle düzenlenmez. Build alıp
-commit'lemeyi unutursanız yayındaki site eski fiyatı göstermeye devam eder.
+   ```
+   Set-Location 'C:\Users\sengu\OneDrive\Masaüstü\tantuni\qr-menu'
+   npm run build
+   ```
+
+4. **Hem değiştirdiğiniz kaynak dosyayı hem `qr/` çıktısını** commit'leyip
+   push'layın. Repo kökünden:
+
+   ```
+   git add qr-menu/data/menu.ts qr
+   git commit -m "Menu: fiyat guncellemesi"
+   git push
+   ```
+
+**İki tuzak:**
+
+- `qr/` klasörü build çıktısıdır, elle düzenlenmez. Build alıp commit'lemeyi
+  unutursanız yayındaki site eski fiyatı göstermeye devam eder.
+- Yalnızca `qr/` klasörünü commit'lerseniz site doğru görünür ama fiyatın
+  neden değiştiğinin git geçmişinde kaydı kalmaz. Kaynak dosyayı da ekleyin.
 
 ## Şube bilgisi güncelleme
 
 Adres, telefon veya çalışma saati değişirse `data/subeler/konak.ts` ya da
 `data/subeler/bostanli.ts` dosyasını düzenleyin, sonra yukarıdaki build
-adımlarını tekrarlayın.
+adımlarını tekrarlayın. Commit'e kaynak dosyayı eklemeyi unutmayın:
+
+```
+git add qr-menu/data/subeler qr
+```
 
 ## Görseller
 
@@ -70,4 +92,42 @@ cp images/logo.webp qr-menu/public/images/logo.webp
 ```
 
 Sonra yukarıdaki build adımlarını tekrarlayın, yoksa yayındaki sayfalar eski
-görseli göstermeye devam eder.
+görseli göstermeye devam eder. Görsel kopyaları da commit'e ekleyin:
+
+```
+git add qr-menu/public/images qr
+```
+
+## Yayından önce elle kontrol
+
+Otomatik testler veriyi ve bileşen davranışını doğruluyor, ama gerçek telefonda
+nasıl göründüğünü doğrulamıyor. Büyük bir değişiklikten sonra bunları elle
+geçin.
+
+`npm run dev` çalıştırın, tarayıcıyı **375px genişliğe** daraltın (Chrome/Edge:
+F12 → cihaz araç çubuğu) ve `http://localhost:3000/qr/konak/` adresini açın:
+
+- [ ] Sayfa yatay kaymıyor, hiçbir şey ekrandan taşmıyor
+- [ ] Kategori sekmeleri yukarıda sabit kalıyor (aşağı kaydırınca kayboluyorsa hata)
+- [ ] "İçecekler"e basınca **yalnızca** içecekler görünüyor
+- [ ] Sol/sağ ok tuşlarıyla sekmeler arasında geçilebiliyor
+- [ ] "EN"e basınca açıklamalar ve sekme adları İngilizce oluyor
+- [ ] EN modunda ürün adları **Türkçe kalıyor** ("Et Dürüm", "Şalgam")
+- [ ] EN modunda adres ve çalışma saatleri de **Türkçe kalıyor**
+- [ ] Tema düğmesi karanlık moda geçiriyor
+- [ ] Sayfayı yenileyince dil ve tema seçimi korunuyor
+- [ ] Telefon numarasına dokununca arama başlıyor
+- [ ] Adrese dokununca Google Maps açılıyor ve doğru şubeyi gösteriyor
+
+Sonra `http://localhost:3000/qr/bostanli/`:
+
+- [ ] Bostanlı adresi, telefonu ve saatleri görünüyor
+- [ ] Konak'a ait hiçbir bilgi görünmüyor
+
+Sonra `http://localhost:3000/qr/`:
+
+- [ ] İki şube kartı da görünüyor, ikisinin linki de doğru sayfayı açıyor
+
+En az bir kez **gerçek bir telefondan**, basılı QR kodu okutarak da bakın —
+`tel:` linki ve Google Maps davranışı masaüstü tarayıcıda tam olarak
+doğrulanamaz.
