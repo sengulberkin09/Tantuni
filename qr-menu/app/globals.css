@@ -88,3 +88,57 @@ h1, h2, h3 {
   margin: 0 auto;
   padding: 0 16px 40px;
 }
+
+/* ---------- Tercih kontrolleri ---------- */
+.tercihler {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.dil-secici {
+  display: flex;
+  background: var(--zemin-yumusak);
+  border: 1px solid var(--cizgi);
+  border-radius: 999px;
+  padding: 2px;
+}
+
+.dil-dugme {
+  min-width: 44px;
+  min-height: 36px;
+  padding: 0 12px;
+  border: 0;
+  border-radius: 999px;
+  background: transparent;
+  color: var(--sonuk);
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  transition: background 160ms ease, color 160ms ease;
+}
+
+.dil-dugme[aria-pressed="true"] {
+  background: var(--flame);
+  color: #fff;
+}
+
+.tema-dugme {
+  display: grid;
+  place-items: center;
+  width: 44px;
+  height: 44px;
+  border: 1px solid var(--cizgi);
+  border-radius: 999px;
+  background: var(--zemin-yumusak);
+  color: var(--yazi);
+  transition: color 160ms ease, border-color 160ms ease;
+}
+
+.tema-dugme:hover { color: var(--flame); border-color: var(--flame); }
+
+.dil-dugme:focus-visible,
+.tema-dugme:focus-visible {
+  outline: 2px solid var(--flame);
+  outline-offset: 2px;
+}
