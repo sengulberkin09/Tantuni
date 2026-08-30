@@ -1,4 +1,4 @@
-import { describe, expect, it } from 'vitest';
+import { afterEach, describe, expect, it } from 'vitest';
 
 import {
   DIL_ANAHTARI,
@@ -47,7 +47,25 @@ describe('temaCozumle', () => {
   });
 });
 
+function tarayiciDiliniAyarla(dil: string) {
+  Object.defineProperty(navigator, 'language', { value: dil, configurable: true });
+}
+
+function sistemTemasiniAyarla(koyuMu: boolean) {
+  window.matchMedia = ((sorgu: string) => ({
+    matches: koyuMu,
+    media: sorgu,
+    addEventListener() {},
+    removeEventListener() {},
+  })) as unknown as typeof window.matchMedia;
+}
+
 describe('TERCIH_SCRIPTI', () => {
+  afterEach(() => {
+    localStorage.clear();
+    document.documentElement.removeAttribute('data-tema');
+  });
+
   it('localStorage anahtarlarını içerir', () => {
     expect(TERCIH_SCRIPTI).toContain(DIL_ANAHTARI);
     expect(TERCIH_SCRIPTI).toContain(TEMA_ANAHTARI);
@@ -61,18 +79,42 @@ describe('TERCIH_SCRIPTI', () => {
     localStorage.setItem(DIL_ANAHTARI, 'en');
     localStorage.setItem(TEMA_ANAHTARI, 'koyu');
     // matchMedia jsdom'da tanımlı değil; script'in ihtiyacı olduğu için ekliyoruz.
-    window.matchMedia = ((sorgu: string) => ({
-      matches: false,
-      media: sorgu,
-      addEventListener() {},
-      removeEventListener() {},
-    })) as unknown as typeof window.matchMedia;
+    sistemTemasiniAyarla(false);
 
     new Function(TERCIH_SCRIPTI)();
 
     expect(document.documentElement.lang).toBe('en');
     expect(document.documentElement.dataset.tema).toBe('koyu');
+  });
 
+  it('kayıt yokken İngilizce tarayıcı ve koyu sistemde script, TS fonksiyonlarıyla aynı sonucu verir', () => {
     localStorage.clear();
+    tarayiciDiliniAyarla('en-GB');
+    sistemTemasiniAyarla(true);
+    document.documentElement.removeAttribute('data-tema');
+    document.documentElement.removeAttribute('lang');
+
+    new Function(TERCIH_SCRIPTI)();
+
+    // Script ile TS fonksiyonlari ayni sonucu vermeli - sapma olursa burada patlar.
+    expect(document.documentElement.lang).toBe(dilCozumle(null, 'en-GB'));
+    expect(document.documentElement.dataset.tema).toBe(temaCozumle(null, true));
+    expect(document.documentElement.lang).toBe('en');
+    expect(document.documentElement.dataset.tema).toBe('koyu');
+  });
+
+  it('kayıt yokken Türkçe tarayıcı ve aydınlık sistemde script, TS fonksiyonlarıyla aynı sonucu verir', () => {
+    localStorage.clear();
+    tarayiciDiliniAyarla('tr-TR');
+    sistemTemasiniAyarla(false);
+    document.documentElement.removeAttribute('data-tema');
+    document.documentElement.removeAttribute('lang');
+
+    new Function(TERCIH_SCRIPTI)();
+
+    expect(document.documentElement.lang).toBe(dilCozumle(null, 'tr-TR'));
+    expect(document.documentElement.dataset.tema).toBe(temaCozumle(null, false));
+    expect(document.documentElement.lang).toBe('tr');
+    expect(document.documentElement.dataset.tema).toBe('acik');
   });
 });
