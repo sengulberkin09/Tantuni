@@ -121,6 +121,8 @@ var ARAYUZ = {
   yolTarifi: { tr: 'Yol tarifi', en: 'Directions' },
   fiyatDegisimTarihi: { tr: 'Fiyat değişim tarihi', en: 'Prices effective from' },
   subeSec: { tr: 'Şube seçin', en: 'Choose a branch' },
+  gorseliBuyut: { tr: 'Fotoğrafı büyüt', en: 'Enlarge photo' },
+  kapat: { tr: 'Kapat', en: 'Close' },
   dilSecimi: { tr: 'Dil seçimi', en: 'Language' },
   temayaGecKoyu: { tr: 'Karanlık temaya geç', en: 'Switch to dark theme' },
   temayaGecAcik: { tr: 'Aydınlık temaya geç', en: 'Switch to light theme' }

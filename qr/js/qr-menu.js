@@ -49,14 +49,103 @@
     return '₺' + tl;
   }
 
+  /* ---------- Lightbox ----------
+     Fotoğrafa dokununca büyük halini gösterir. Katman bir kez kurulup
+     body'ye ekleniyor; dil değişince yeniden çizilmiyor. */
+
+  var lightbox = null;
+  var lightboxuAcan = null;
+
+  function lightboxKur() {
+    if (lightbox) return lightbox;
+
+    var katman = el('div', 'lightbox');
+    katman.hidden = true;
+    katman.setAttribute('role', 'dialog');
+    katman.setAttribute('aria-modal', 'true');
+
+    var kutu = el('div', 'lightbox-kutu');
+    var resim = el('img', 'lightbox-resim');
+    kutu.appendChild(resim);
+
+    var ad = el('p', 'lightbox-ad');
+    ad.lang = 'tr'; /* Ürün adları her iki dilde de Türkçe. */
+    kutu.appendChild(ad);
+    katman.appendChild(kutu);
+
+    var kapat = el('button', 'lightbox-kapat');
+    kapat.type = 'button';
+    kapat.innerHTML = '<svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"/></svg>';
+    kapat.addEventListener('click', lightboxKapat);
+    katman.appendChild(kapat);
+
+    /* Görselin dışına dokununca kapansın. */
+    katman.addEventListener('click', function (olay) {
+      if (olay.target === katman || olay.target === kutu) lightboxKapat();
+    });
+
+    /* Katmanda tek odaklanabilir öğe var; Tab dışarı kaçmasın. */
+    katman.addEventListener('keydown', function (olay) {
+      if (olay.key === 'Escape') {
+        lightboxKapat();
+      } else if (olay.key === 'Tab') {
+        olay.preventDefault();
+        kapat.focus();
+      }
+    });
+
+    document.body.appendChild(katman);
+    lightbox = { katman: katman, resim: resim, ad: ad, kapat: kapat };
+    return lightbox;
+  }
+
+  function lightboxAc(urun, acanDugme) {
+    var lb = lightboxKur();
+    lb.resim.src = urun.gorsel;
+    lb.resim.alt = urun.ad;
+    lb.ad.textContent = urun.ad;
+    lb.katman.setAttribute('aria-label', urun.ad);
+    lb.kapat.setAttribute('aria-label', ARAYUZ.kapat[dil]);
+    lb.kapat.title = ARAYUZ.kapat[dil];
+
+    lb.katman.hidden = false;
+    document.body.classList.add('lightbox-acik');
+    lightboxuAcan = acanDugme || null;
+    lb.kapat.focus();
+  }
+
+  function lightboxKapat() {
+    if (!lightbox || lightbox.katman.hidden) return;
+    lightbox.katman.hidden = true;
+    document.body.classList.remove('lightbox-acik');
+
+    /* Odağı fotoğrafa geri ver; dil değişmişse düğme kopmuş olabilir. */
+    if (lightboxuAcan && lightboxuAcan.isConnected) lightboxuAcan.focus();
+    lightboxuAcan = null;
+  }
+
+  /* Görseli tıklanabilir düğmeye sarar. */
+  function gorselDugmesi(urun, boyut, sinif, oncelikli) {
+    var dugme = el('button', 'gorsel-dugme');
+    dugme.type = 'button';
+    dugme.setAttribute('aria-label', ARAYUZ.gorseliBuyut[dil] + ': ' + urun.ad);
+
+    var img = gorselKur(urun.gorsel, urun.ad, boyut, oncelikli);
+    img.className = sinif;
+    dugme.appendChild(img);
+
+    dugme.addEventListener('click', function () {
+      lightboxAc(urun, dugme);
+    });
+    return dugme;
+  }
+
   /* ---------- Kart yapıcılar ---------- */
 
   function tantuniKarti(urun, oncelikli) {
     var kart = el('article', 'urun-karti');
 
-    var img = gorselKur(urun.gorsel, urun.ad, 92, oncelikli);
-    img.className = 'urun-gorsel';
-    kart.appendChild(img);
+    kart.appendChild(gorselDugmesi(urun, 92, 'urun-gorsel', oncelikli));
 
     var govde = el('div', 'urun-govde');
 
@@ -83,9 +172,7 @@
   function icecekKarti(urun) {
     var kart = el('article', 'icecek-karti');
 
-    var img = gorselKur(urun.gorsel, urun.ad, 56, false);
-    img.className = 'icecek-gorsel';
-    kart.appendChild(img);
+    kart.appendChild(gorselDugmesi(urun, 56, 'icecek-gorsel', false));
 
     var ad = metin('span', 'icecek-ad', urun.ad);
     ad.lang = 'tr';

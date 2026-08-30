@@ -75,6 +75,18 @@ bunlar JavaScript kapalıyken de görünsün diye HTML'e yazılı.
 `ICECEKLER`) yeni bir kayıt ekleyin. Görseli önce `images/menu/` klasörüne
 koyun. `node qr/kontrol.js` görselin gerçekten var olduğunu doğrular.
 
+## Fotoğraf büyütme
+
+Ürün fotoğrafına dokununca büyük hali koyu bir katman üzerinde açılır. Kapatma:
+sağ üstteki X, görselin dışına dokunma veya `Esc`.
+
+Fotoğraflar `<button>` içine sarılıyor — ekran okuyucu ve klavye kullanıcısı
+tıklanabilir olduğunu böyle anlıyor. Katman `qr/js/qr-menu.js` içinde bir kez
+kurulup `<body>`ye ekleniyor, ekstra kütüphane yok.
+
+Yeni bir ürün eklediğinizde ayrıca bir şey yapmanız gerekmez; fotoğraf
+büyütme tüm ürünlere kendiliğinden uygulanır.
+
 ## Stil değiştirirken dikkat
 
 Kategori sekmelerinin filtresi tamamen CSS ile çalışıyor: JavaScript yalnızca
