@@ -53,7 +53,8 @@ tantuni/
 │   │   └── bostanli/page.tsx       → /qr/bostanli/  ← QR #2
 │   ├── components/
 │   ├── data/
-│   ├── scripts/verify-menu.mjs
+│   ├── tests/                      vitest testleri
+│   ├── scripts/copy-out.mjs        out/ → ../qr/
 │   ├── public/images/menu/*.webp
 │   └── README.md                   güncelleme akışı
 └── qr/                             BUILD ÇIKTISI — commit'lenir
@@ -323,7 +324,8 @@ Sayfa gövdesi yatay kaydırmaz.
 Statik, girdisiz, ağ çağrısı olmayan bir sayfa — klasik runtime hata yüzeyi yok.
 Gerçek risk veride: eksik görsel, tipo fiyat, unutulmuş çeviri.
 
-`qr-menu/scripts/verify-menu.mjs` (`npm test`) şunları doğrular:
+Doğrulama vitest ile yapılır. `qr-menu/tests/veri.test.ts` (`npm test`) şunları
+doğrular:
 
 - Her ürünün `gorsel` dosyası `public/` altında gerçekten var
 - Her fiyat pozitif tam sayı
@@ -334,7 +336,10 @@ Gerçek risk veride: eksik görsel, tipo fiyat, unutulmuş çeviri.
 - Ürün `id`'leri benzersiz
 - Her şubede zorunlu alanların hepsi dolu, iki `slug` çakışmıyor
 
-Script `prebuild`'e bağlanır — bozuk veri build'e giremez.
+Testler `prebuild`'e bağlanır — bozuk veri build'e giremez.
+
+Bileşen davranışları (sekme filtresi, TR/EN geçişi, tema düğmesi) da aynı vitest
+kurulumunda `@testing-library/react` ile test edilir.
 
 Ek doğrulama:
 
