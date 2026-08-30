@@ -64,137 +64,185 @@
 
 <main id="icerik">
 
-  <div class="page-hero">
-    <h1>Menümüz</h1>
-    <p>Et ve tavuk tantuniler, dürümler ve yoğurtlu çeşitler — hepsi günlük taze hazırlanır.</p>
+  <div class="menu-head">
+    <div class="container">
+      <h1>Menü</h1>
+      <p>Et &amp; tavuk tantuniler, dürümler, yoğurtlular ve içecekler.</p>
+    </div>
   </div>
 
-  <section>
+  <section class="menu-section">
     <div class="container">
-      <div class="menu-tabs" role="tablist">
-        <button class="menu-tab" role="tab" aria-selected="true" aria-controls="panel-tantuni">Tantuniler</button>
-        <button class="menu-tab" role="tab" aria-selected="false" aria-controls="panel-icecek">İçecekler</button>
+      <div class="menu-tabs" role="tablist" aria-label="Menü kategorileri">
+        <button class="menu-tab" id="tab-et" role="tab" aria-selected="true" aria-controls="panel-et" tabindex="0">Et Tantuniler</button>
+        <button class="menu-tab" id="tab-tavuk" role="tab" aria-selected="false" aria-controls="panel-tavuk" tabindex="-1">Tavuk Tantuniler</button>
+        <button class="menu-tab" id="tab-icecek" role="tab" aria-selected="false" aria-controls="panel-icecek" tabindex="-1">İçecekler</button>
       </div>
 
-      <div class="menu-panel active" id="panel-tantuni" role="tabpanel">
-        <div class="menu-group">
-          <h3>Et Tantuniler</h3>
-          <div class="menu-list">
-            <div class="menu-item">
-              <img class="menu-item-thumb" src="images/menu/et-tantuni-ekmek-arasi.webp" alt="Ekmek Arası Et Tantuni" width="64" height="64" loading="lazy">
-              <span class="menu-item-name">Ekmek Arası Et Tantuni</span>
-              <span class="menu-item-dots"></span>
-              <span class="menu-item-price">₺410</span>
+      <div class="menu-panel active" id="panel-et" role="tabpanel" aria-labelledby="tab-et" tabindex="0">
+        <div class="menu-list">
+          <article class="menu-item-card">
+            <img class="menu-item-thumb" src="images/menu/et-tantuni-durum.webp" alt="Et Tantuni Dürüm" width="64" height="64" loading="lazy" decoding="async">
+            <div class="menu-item-info">
+              <h3>Et Dürüm</h3>
+              <p class="menu-item-desc">İnce lavaşta bol sebzeli, baharatlı et tantuni.</p>
+              <div class="menu-price-options">
+                <span class="price-option"><span class="po-label">Tek · 60 gr</span><span class="po-price">₺330</span></span>
+                <span class="price-option"><span class="po-label">İçi Bol · 90 gr</span><span class="po-price">₺460</span></span>
+              </div>
             </div>
-            <div class="menu-item">
-              <img class="menu-item-thumb" src="images/menu/et-tantuni-durum.webp" alt="Et Tantuni Dürüm" width="64" height="64" loading="lazy">
-              <span class="menu-item-name">Et Tantuni Dürüm</span>
-              <span class="menu-item-dots"></span>
-              <span class="menu-item-price">₺410</span>
+          </article>
+          <article class="menu-item-card">
+            <img class="menu-item-thumb" src="images/menu/et-tantuni-ekmek-arasi.webp" alt="Ekmek Arası Et Tantuni" width="64" height="64" loading="lazy" decoding="async">
+            <div class="menu-item-info">
+              <h3>Et Ekmek Arası</h3>
+              <p class="menu-item-desc">Taze ekmek arasında bol sebzeli, baharatlı et tantuni.</p>
+              <div class="menu-price-options">
+                <span class="price-option"><span class="po-label">Tek · 60 gr</span><span class="po-price">₺330</span></span>
+                <span class="price-option"><span class="po-label">İçi Bol · 90 gr</span><span class="po-price">₺460</span></span>
+              </div>
             </div>
-            <div class="menu-item">
-              <img class="menu-item-thumb" src="images/menu/et-tantuni-yogurtlu.webp" alt="Yoğurtlu Et Tantuni" width="64" height="64" loading="lazy">
-              <span class="menu-item-name">Yoğurtlu Et Tantuni</span>
-              <span class="menu-item-dots"></span>
-              <span class="menu-item-price">₺530</span>
+          </article>
+          <article class="menu-item-card">
+            <img class="menu-item-thumb" src="images/menu/et-tantuni-yogurtlu.webp" alt="Yoğurtlu Et Tantuni" width="64" height="64" loading="lazy" decoding="async">
+            <div class="menu-item-info">
+              <h3>Et Yoğurtlu</h3>
+              <p class="menu-item-desc">Taze pişmiş et, ev yapımı yoğurt ve taze lavaş ile.</p>
+              <div class="menu-price-options">
+                <span class="price-option"><span class="po-label">Tek · 60 gr</span><span class="po-price">₺420</span></span>
+                <span class="price-option"><span class="po-label">İçi Bol · 90 gr</span><span class="po-price">₺600</span></span>
+              </div>
             </div>
-          </div>
-        </div>
-
-        <div class="menu-group">
-          <h3>Tavuk Tantuniler</h3>
-          <div class="menu-list">
-            <div class="menu-item">
-              <img class="menu-item-thumb" src="images/menu/tavuk-tantuni-ekmek-arasi.webp" alt="Ekmek Arası Tavuk Tantuni" width="64" height="64" loading="lazy">
-              <span class="menu-item-name">Ekmek Arası Tavuk Tantuni</span>
-              <span class="menu-item-dots"></span>
-              <span class="menu-item-price">₺300</span>
-            </div>
-            <div class="menu-item">
-              <img class="menu-item-thumb" src="images/menu/tavuk-tantuni-durum.webp" alt="Tavuk Tantuni Dürüm" width="64" height="64" loading="lazy">
-              <span class="menu-item-name">Tavuk Tantuni Dürüm</span>
-              <span class="menu-item-dots"></span>
-              <span class="menu-item-price">₺300</span>
-            </div>
-            <div class="menu-item">
-              <img class="menu-item-thumb" src="images/menu/tavuk-tantuni-yogurtlu.webp" alt="Yoğurtlu Tavuk Tantuni" width="64" height="64" loading="lazy">
-              <span class="menu-item-name">Yoğurtlu Tavuk Tantuni</span>
-              <span class="menu-item-dots"></span>
-              <span class="menu-item-price">₺400</span>
-            </div>
-          </div>
+          </article>
         </div>
       </div>
 
-      <div class="menu-panel" id="panel-icecek" role="tabpanel">
-        <div class="menu-group">
-          <h3>İçecekler</h3>
-          <div class="drinks-grid">
-            <div class="menu-item">
-              <img class="menu-item-thumb" src="images/menu/ayran.webp" alt="Ayran" width="64" height="64" loading="lazy">
-              <span class="menu-item-name">Ayran</span>
-              <span class="menu-item-dots"></span>
-              <span class="menu-item-price">₺70</span>
+      <div class="menu-panel" id="panel-tavuk" role="tabpanel" aria-labelledby="tab-tavuk" tabindex="0">
+        <div class="menu-list">
+          <article class="menu-item-card">
+            <img class="menu-item-thumb" src="images/menu/tavuk-tantuni-durum.webp" alt="Tavuk Tantuni Dürüm" width="64" height="64" loading="lazy" decoding="async">
+            <div class="menu-item-info">
+              <h3>Tavuk Dürüm</h3>
+              <p class="menu-item-desc">İnce lavaşta bol sebzeli tavuk tantuni.</p>
+              <div class="menu-price-options">
+                <span class="price-option"><span class="po-label">Tek · 60 gr</span><span class="po-price">₺240</span></span>
+                <span class="price-option"><span class="po-label">İçi Bol · 90 gr</span><span class="po-price">₺330</span></span>
+              </div>
             </div>
-            <div class="menu-item">
-              <img class="menu-item-thumb" src="images/menu/salgam.webp" alt="Şalgam" width="64" height="64" loading="lazy">
-              <span class="menu-item-name">Şalgam</span>
-              <span class="menu-item-dots"></span>
-              <span class="menu-item-price">₺70</span>
+          </article>
+          <article class="menu-item-card">
+            <img class="menu-item-thumb" src="images/menu/tavuk-tantuni-ekmek-arasi.webp" alt="Ekmek Arası Tavuk Tantuni" width="64" height="64" loading="lazy" decoding="async">
+            <div class="menu-item-info">
+              <h3>Tavuk Ekmek Arası</h3>
+              <p class="menu-item-desc">Taze ekmek arasında bol sebzeli tavuk tantuni.</p>
+              <div class="menu-price-options">
+                <span class="price-option"><span class="po-label">Tek · 60 gr</span><span class="po-price">₺240</span></span>
+                <span class="price-option"><span class="po-label">İçi Bol · 90 gr</span><span class="po-price">₺330</span></span>
+              </div>
             </div>
-            <div class="menu-item">
-              <img class="menu-item-thumb" src="images/menu/kola.webp" alt="Kola" width="64" height="64" loading="lazy">
-              <span class="menu-item-name">Kola</span>
-              <span class="menu-item-dots"></span>
-              <span class="menu-item-price">₺80</span>
+          </article>
+          <article class="menu-item-card">
+            <img class="menu-item-thumb" src="images/menu/tavuk-tantuni-yogurtlu.webp" alt="Yoğurtlu Tavuk Tantuni" width="64" height="64" loading="lazy" decoding="async">
+            <div class="menu-item-info">
+              <h3>Tavuk Yoğurtlu</h3>
+              <p class="menu-item-desc">Yumuşacık tavuk, yoğurt ve kavrulmuş biberlerle.</p>
+              <div class="menu-price-options">
+                <span class="price-option"><span class="po-label">Tek · 60 gr</span><span class="po-price">₺320</span></span>
+                <span class="price-option"><span class="po-label">İçi Bol · 90 gr</span><span class="po-price">₺450</span></span>
+              </div>
             </div>
-            <div class="menu-item">
-              <img class="menu-item-thumb" src="images/menu/fanta.webp" alt="Fanta" width="64" height="64" loading="lazy">
-              <span class="menu-item-name">Fanta</span>
-              <span class="menu-item-dots"></span>
-              <span class="menu-item-price">₺80</span>
-            </div>
-            <div class="menu-item">
-              <img class="menu-item-thumb" src="images/menu/nigde-gazozu.webp" alt="Niğde Gazozu" width="64" height="64" loading="lazy">
-              <span class="menu-item-name">Niğde Gazozu</span>
-              <span class="menu-item-dots"></span>
-              <span class="menu-item-price">₺70</span>
-            </div>
-            <div class="menu-item">
-              <img class="menu-item-thumb" src="images/menu/sprite.webp" alt="Sprite" width="64" height="64" loading="lazy">
-              <span class="menu-item-name">Sprite</span>
-              <span class="menu-item-dots"></span>
-              <span class="menu-item-price">₺80</span>
-            </div>
-            <div class="menu-item">
-              <img class="menu-item-thumb" src="images/menu/ice-tea.webp" alt="Ice Tea" width="64" height="64" loading="lazy">
-              <span class="menu-item-name">Ice Tea</span>
-              <span class="menu-item-dots"></span>
-              <span class="menu-item-price">₺80</span>
-            </div>
-            <div class="menu-item">
-              <img class="menu-item-thumb" src="images/menu/maden-suyu.webp" alt="Maden Suyu" width="64" height="64" loading="lazy">
-              <span class="menu-item-name">Maden Suyu</span>
-              <span class="menu-item-dots"></span>
-              <span class="menu-item-price">₺35</span>
-            </div>
-            <div class="menu-item">
-              <img class="menu-item-thumb" src="images/menu/meyve-suyu.webp" alt="Meyve Suyu" width="64" height="64" loading="lazy">
-              <span class="menu-item-name">Meyve Suyu</span>
-              <span class="menu-item-dots"></span>
-              <span class="menu-item-price">₺80</span>
-            </div>
-            <div class="menu-item">
-              <img class="menu-item-thumb" src="images/menu/su.webp" alt="Su" width="64" height="64" loading="lazy">
-              <span class="menu-item-name">Su</span>
-              <span class="menu-item-dots"></span>
-              <span class="menu-item-price">₺20</span>
-            </div>
+          </article>
+        </div>
+      </div>
+
+      <div class="menu-panel" id="panel-icecek" role="tabpanel" aria-labelledby="tab-icecek" tabindex="0">
+        <div class="drinks-grid">
+          <div class="menu-item">
+            <img class="menu-item-thumb" src="images/menu/ayran.webp" alt="Ayran" width="56" height="56" loading="lazy" decoding="async">
+            <span class="menu-item-name">Ayran</span>
+            <span class="menu-item-dots"></span>
+            <span class="menu-item-price">₺70</span>
+          </div>
+          <div class="menu-item">
+            <img class="menu-item-thumb" src="images/menu/salgam.webp" alt="Şalgam" width="56" height="56" loading="lazy" decoding="async">
+            <span class="menu-item-name">Şalgam</span>
+            <span class="menu-item-dots"></span>
+            <span class="menu-item-price">₺70</span>
+          </div>
+          <div class="menu-item">
+            <img class="menu-item-thumb" src="images/menu/kola.webp" alt="Kola" width="56" height="56" loading="lazy" decoding="async">
+            <span class="menu-item-name">Kola</span>
+            <span class="menu-item-dots"></span>
+            <span class="menu-item-price">₺90</span>
+          </div>
+          <div class="menu-item">
+            <img class="menu-item-thumb" src="images/menu/fanta.webp" alt="Fanta" width="56" height="56" loading="lazy" decoding="async">
+            <span class="menu-item-name">Fanta</span>
+            <span class="menu-item-dots"></span>
+            <span class="menu-item-price">₺90</span>
+          </div>
+          <div class="menu-item">
+            <img class="menu-item-thumb" src="images/menu/nigde-gazozu.webp" alt="Niğde Gazozu" width="56" height="56" loading="lazy" decoding="async">
+            <span class="menu-item-name">Niğde Gazozu</span>
+            <span class="menu-item-dots"></span>
+            <span class="menu-item-price">₺70</span>
+          </div>
+          <div class="menu-item">
+            <img class="menu-item-thumb" src="images/menu/ice-tea.webp" alt="Ice Tea" width="56" height="56" loading="lazy" decoding="async">
+            <span class="menu-item-name">Ice Tea</span>
+            <span class="menu-item-dots"></span>
+            <span class="menu-item-price">₺90</span>
+          </div>
+          <div class="menu-item">
+            <img class="menu-item-thumb" src="images/menu/sprite.webp" alt="Sprite" width="56" height="56" loading="lazy" decoding="async">
+            <span class="menu-item-name">Sprite</span>
+            <span class="menu-item-dots"></span>
+            <span class="menu-item-price">₺90</span>
+          </div>
+          <div class="menu-item">
+            <img class="menu-item-thumb" src="images/menu/meyve-suyu.webp" alt="Meyve Suyu" width="56" height="56" loading="lazy" decoding="async">
+            <span class="menu-item-name">Meyve Suyu</span>
+            <span class="menu-item-dots"></span>
+            <span class="menu-item-price">₺90</span>
+          </div>
+          <div class="menu-item">
+            <img class="menu-item-thumb" src="images/menu/maden-suyu.webp" alt="Maden Suyu" width="56" height="56" loading="lazy" decoding="async">
+            <span class="menu-item-name">Maden Suyu</span>
+            <span class="menu-item-dots"></span>
+            <span class="menu-item-price">₺40</span>
+          </div>
+          <div class="menu-item">
+            <img class="menu-item-thumb" src="images/menu/su.webp" alt="Su" width="56" height="56" loading="lazy" decoding="async">
+            <span class="menu-item-name">Su</span>
+            <span class="menu-item-dots"></span>
+            <span class="menu-item-price">₺25</span>
           </div>
         </div>
       </div>
 
-      <p class="text-center mt-lg" style="color:var(--color-muted-on-cream); font-size:.85rem;">Fiyatlar güncel menü panosundan alınmıştır, güncel fiyat için işletmeyi arayabilirsiniz.</p>
+      <div class="menu-branches">
+        <h2>Şubelerimiz</h2>
+        <div class="menu-branch">
+          <h3>Konak Şubesi</h3>
+          <p>Konak, 902. Sk. No:7, 35250 Konak/İzmir</p>
+          <p><a href="tel:+905528883533">0552 888 35 33</a></p>
+          <p>Her gün 10:30 – 20:15</p>
+          <p class="menu-branch-services">İçeride Servis · Paket Servisi · Adrese Servis</p>
+        </div>
+        <div class="menu-branch">
+          <h3>Bostanlı Şubesi</h3>
+          <p>Bostanlı, Cemal Gürsel Cd. No:530B, 35590 Karşıyaka/İzmir</p>
+          <p><a href="tel:+905417623775">+90 541 762 37 75</a></p>
+          <p>Her gün, kapanış 01:30</p>
+          <p class="menu-branch-services">İçeride Servis · Arabaya Teslim Alma · Temassız Teslimat</p>
+        </div>
+      </div>
+
+      <div class="menu-notes">
+        <p>Tüm şubelerimizde menü ve fiyatlar aynıdır.</p>
+        <p>Alerjiniz varsa lütfen sipariş vermeden önce personelimize bilgi verin.</p>
+        <p class="menu-price-date">Fiyat değişiklik tarihi: 15/08/2026</p>
+      </div>
     </div>
   </section>
 

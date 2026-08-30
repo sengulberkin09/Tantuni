@@ -178,23 +178,46 @@ function initGalleryLightbox() {
   });
 }
 
-/* ---------- Menü sayfası sekmeleri ---------- */
+/* ---------- Menü sayfası sekmeleri (QR menü) ---------- */
 function initMenuTabs() {
-  var tabs = document.querySelectorAll(".menu-tab");
-  if (!tabs.length) return;
+  var tablist = document.querySelector(".menu-tabs");
+  var tabs = Array.prototype.slice.call(document.querySelectorAll(".menu-tab"));
+  if (!tablist || !tabs.length) return;
 
-  tabs.forEach(function (tab) {
+  var panels = document.querySelectorAll(".menu-panel");
+
+  function activate(tab, setFocus) {
+    tabs.forEach(function (t) {
+      var isActive = t === tab;
+      t.setAttribute("aria-selected", isActive ? "true" : "false");
+      t.setAttribute("tabindex", isActive ? "0" : "-1");
+    });
+
+    var targetId = tab.getAttribute("aria-controls");
+    panels.forEach(function (panel) {
+      panel.classList.toggle("active", panel.id === targetId);
+    });
+
+    // Aktif sekmeyi yatay kaydırılabilir barda görünür kıl
+    tablist.scrollLeft = Math.max(0, tab.offsetLeft - 24);
+
+    if (setFocus) tab.focus();
+  }
+
+  tabs.forEach(function (tab, index) {
     tab.addEventListener("click", function () {
-      var targetId = tab.getAttribute("aria-controls");
+      activate(tab, false);
+    });
 
-      tabs.forEach(function (t) {
-        t.setAttribute("aria-selected", "false");
-      });
-      tab.setAttribute("aria-selected", "true");
-
-      document.querySelectorAll(".menu-panel").forEach(function (panel) {
-        panel.classList.toggle("active", panel.id === targetId);
-      });
+    tab.addEventListener("keydown", function (e) {
+      var next;
+      if (e.key === "ArrowRight" || e.key === "ArrowDown") next = tabs[(index + 1) % tabs.length];
+      else if (e.key === "ArrowLeft" || e.key === "ArrowUp") next = tabs[(index - 1 + tabs.length) % tabs.length];
+      else if (e.key === "Home") next = tabs[0];
+      else if (e.key === "End") next = tabs[tabs.length - 1];
+      else return;
+      e.preventDefault();
+      activate(next, true);
     });
   });
 }
