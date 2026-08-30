@@ -72,9 +72,11 @@ Takıldığını düşünüp yarıda kesmeyin.
 
 ## Şube bilgisi güncelleme
 
-Adres, telefon veya çalışma saati değişirse `data/subeler/konak.ts` ya da
-`data/subeler/bostanli.ts` dosyasını düzenleyin, sonra yukarıdaki build
-adımlarını tekrarlayın. Commit'e kaynak dosyayı eklemeyi unutmayın:
+Adres, telefon veya çalışma saati değişirse `qr-menu/data/subeler/konak.ts` ya
+da `qr-menu/data/subeler/bostanli.ts` dosyasını düzenleyin, sonra yukarıdaki
+build adımlarını tekrarlayın.
+
+Commit'e kaynak dosyayı eklemeyi unutmayın — **repo kökünden**:
 
 ```
 git add qr-menu/data/subeler qr
@@ -92,7 +94,9 @@ cp images/logo.webp qr-menu/public/images/logo.webp
 ```
 
 Sonra yukarıdaki build adımlarını tekrarlayın, yoksa yayındaki sayfalar eski
-görseli göstermeye devam eder. Görsel kopyaları da commit'e ekleyin:
+görseli göstermeye devam eder.
+
+Görsel kopyalarını da commit'e ekleyin — **repo kökünden**:
 
 ```
 git add qr-menu/public/images qr
@@ -127,6 +131,8 @@ Sonra `http://localhost:3000/qr/bostanli/`:
 Sonra `http://localhost:3000/qr/`:
 
 - [ ] İki şube kartı da görünüyor, ikisinin linki de doğru sayfayı açıyor
+
+Bitince dev sunucusunu `Ctrl+C` ile kapatın.
 
 En az bir kez **gerçek bir telefondan**, basılı QR kodu okutarak da bakın —
 `tel:` linki ve Google Maps davranışı masaüstü tarayıcıda tam olarak
