@@ -1,0 +1,52 @@
+<!doctype html>
+<html lang="tr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Hisarönü Tantuni Yakup Usta | Menü</title>
+<meta name="description" content="Konak ve Bostanlı şubelerinin QR menüleri.">
+<meta name="robots" content="noindex, nofollow">
+<meta name="theme-color" content="#e85d2c">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,wght@0,600;0,700;0,900;1,600&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="icon" href="/images/favicon-32.png" type="image/png">
+<link rel="stylesheet" href="/qr/css/qr-menu.css">
+<script>
+/* Yalnizca tema; bu sayfa Turkce. */
+(function () {
+  try {
+    var t = localStorage.getItem('tantuni-qr-tema');
+    if (t !== 'acik' && t !== 'koyu') {
+      t = (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) ? 'koyu' : 'acik';
+    }
+    document.documentElement.setAttribute('data-tema', t);
+  } catch (e) {}
+})();
+</script>
+</head>
+<body>
+
+<div class="kabuk sube-secim">
+
+  <img class="logo secim-logo" src="/images/logo.webp" alt="Hisarönü Tantuni Yakup Usta logosu" width="72" height="72">
+  <h1 class="secim-baslik">Hisarönü Tantuni Yakup Usta</h1>
+  <p class="secim-alt">Şube seçin</p>
+
+  <nav class="secim-listesi">
+    <a class="secim-karti" href="/qr/konak/">
+      <span class="secim-sube-ad">Konak</span>
+      <span class="secim-sube-adres">Konak, 902. Sk. No:7, 35250 Konak/İzmir</span>
+      <span class="secim-sube-saat">Her gün 10:30 – 20:15</span>
+    </a>
+    <a class="secim-karti" href="/qr/bostanli/">
+      <span class="secim-sube-ad">Bostanlı</span>
+      <span class="secim-sube-adres">Bostanlı, Cemal Gürsel Cd. No:530B, 35590 Karşıyaka/İzmir</span>
+      <span class="secim-sube-saat">Her gün, kapanış 01:30</span>
+    </a>
+  </nav>
+
+</div>
+
+</body>
+</html>

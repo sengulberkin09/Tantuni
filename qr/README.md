@@ -1,0 +1,129 @@
+# QR Menü — Hisarönü Tantuni Yakup Usta
+
+Konak ve Bostanlı şubeleri için görüntüleme amaçlı QR menü sayfaları.
+
+- `/qr/konak/` — Konak şubesi (QR #1)
+- `/qr/bostanli/` — Bostanlı şubesi (QR #2)
+- `/qr/` — şube seçim sayfası
+
+Sipariş, sepet veya ödeme içermez.
+
+**Build adımı yok.** Sitenin geri kalanıyla aynı teknoloji: düz HTML + CSS + JS.
+Dosyayı düzenleyip commit'lediğinizde yayına girer.
+
+## Dosyalar
+
+```
+qr/
+├── index.html              şube seçim sayfası
+├── konak/index.html        Konak sayfası
+├── bostanli/index.html     Bostanlı sayfası
+├── css/qr-menu.css         tüm stiller
+├── kontrol.js              isteğe bağlı veri kontrolü
+└── js/
+    ├── menu-verisi.js      ORTAK: ürünler, fiyatlar, çeviriler
+    ├── sube-konak.js       Konak adres/telefon/saat
+    ├── sube-bostanli.js    Bostanlı adres/telefon/saat
+    └── qr-menu.js          menüyü çizer, sekme/dil/tema
+```
+
+İki şube sayfası birbirinin aynısı; yalnızca dört satırda ayrışıyorlar (başlık,
+açıklama, `h1` ve yükledikleri `sube-*.js` dosyası).
+
+Görseller ana sitenin `images/menu/` klasöründen okunuyor — kopya yok, bir
+görseli değiştirmek her iki sayfaya da anında yansır.
+
+## Fiyat veya ürün güncelleme
+
+1. `qr/js/menu-verisi.js` dosyasını açın. **Tek kaynak burası** — her iki şube
+   sayfası da bu dosyadan besleniyor.
+2. Fiyatı değiştirin. Tantuni ürünlerinde `porsiyonlarKur(tek, içiBol)`,
+   içeceklerde `fiyat:` alanı.
+3. Fiyat değişim tarihini güncelleyin: dosyanın başındaki
+   `FIYAT_DEGISIM_TARIHI`.
+4. İsteğe bağlı ama tavsiye edilir — repo kökünden kontrol edin:
+
+   ```
+   node qr/kontrol.js
+   ```
+
+5. Commit'leyip push'layın:
+
+   ```
+   git add qr/js/menu-verisi.js
+   git commit -m "Menu: fiyat guncellemesi"
+   git push
+   ```
+
+Build almanız gerekmez, kopyalanacak çıktı yoktur.
+
+## Şube bilgisi güncelleme
+
+Adres, telefon veya çalışma saati değişirse `qr/js/sube-konak.js` ya da
+`qr/js/sube-bostanli.js` dosyasını düzenleyin.
+
+Adresi değiştirirseniz `mapsUrl` içindeki adres metnini de aynı şekilde
+güncelleyin — Google Maps linki oradan kuruluyor.
+
+Şube adı ya da başlığı değişirse ilgili sayfanın `index.html` dosyasındaki
+`<title>`, `<meta name="description">` ve `<h1>` metinlerini de elle güncelleyin;
+bunlar JavaScript kapalıyken de görünsün diye HTML'e yazılı.
+
+## Ürün ekleme
+
+`menu-verisi.js` içinde ilgili diziye (`ET_URUNLERI`, `TAVUK_URUNLERI` veya
+`ICECEKLER`) yeni bir kayıt ekleyin. Görseli önce `images/menu/` klasörüne
+koyun. `node qr/kontrol.js` görselin gerçekten var olduğunu doğrular.
+
+## Diller
+
+Ürün adları iki dilde de Türkçe kalır — menüde "Et Dürüm" yazar, "Beef Wrap"
+değil. Yabancı ziyaretçi ürünün adını garsona söylediği gibi okur.
+
+Çevrilenler: ürün açıklamaları, porsiyon etiketleri, kategori adları, arayüz
+metinleri.
+
+Çevrilmeyenler: ürün adları, şube adresi, çalışma saatleri.
+
+Ziyaretçinin tarayıcı dili İngilizce ise sayfa İngilizce açılır; seçim
+tarayıcıda hatırlanır.
+
+## JavaScript kapalıysa
+
+Menü tarayıcıda çiziliyor, çünkü build adımı olmadan fiyatları tek dosyada
+tutmanın başka yolu yok. JavaScript kapalıysa sayfa bir uyarı gösterip ana
+sitedeki `menu.html` sayfasına yönlendirir. Pratikte QR okutan telefonların
+hepsinde JavaScript açıktır.
+
+## Yayına almadan önce elle kontrol
+
+Otomatik kontrol veriyi doğruluyor, gerçek telefonda nasıl göründüğünü değil.
+Büyük bir değişiklikten sonra bunları elle geçin.
+
+Tarayıcıyı **375px genişliğe** daraltın (Chrome/Edge: F12 → cihaz araç çubuğu)
+ve `/qr/konak/` sayfasını açın:
+
+- [ ] Sayfa yatay kaymıyor
+- [ ] Üç sekme de tam görünüyor; "İçecekler" kırpılmıyor
+- [ ] Kategori sekmeleri yukarıda sabit kalıyor
+- [ ] "İçecekler"e basınca yalnızca içecekler görünüyor
+- [ ] Sol/sağ ok tuşlarıyla sekmeler arasında geçiliyor
+- [ ] "EN"e basınca açıklamalar ve sekme adları İngilizce oluyor
+- [ ] EN modunda ürün adları Türkçe kalıyor ("Et Dürüm", "Şalgam")
+- [ ] EN modunda adres ve çalışma saatleri de Türkçe kalıyor
+- [ ] Tema düğmesi karanlık moda geçiriyor
+- [ ] Sayfayı yenileyince dil ve tema seçimi korunuyor
+- [ ] Fiyatlar okunaklı, ürün görselleri yükleniyor
+
+`/qr/bostanli/` sayfasında:
+
+- [ ] Bostanlı adresi, telefonu ve saatleri görünüyor
+- [ ] Konak'a ait hiçbir bilgi görünmüyor
+
+`/qr/` sayfasında:
+
+- [ ] İki şube kartı da görünüyor, linkler doğru sayfayı açıyor
+
+En az bir kez **gerçek bir telefondan**, basılı QR kodu okutarak bakın —
+telefon numarasına dokununca arama başlamalı, adrese dokununca Google Maps
+doğru şubeyi göstermeli. Bu ikisi masaüstü tarayıcıda tam doğrulanamaz.

@@ -1,0 +1,73 @@
+<!doctype html>
+<html lang="tr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Hisarönü Tantuni Yakup Usta - Bostanlı | Menü</title>
+<meta name="description" content="Bostanlı şubesi menüsü: et ve tavuk tantuni çeşitleri, içecekler ve güncel fiyatlar.">
+<!-- Bu sayfa menu.html ile ayni icerigi tasiyor; arama sonuclarinda ana site
+     gorunsun diye indekslenmiyor. -->
+<meta name="robots" content="noindex, nofollow">
+<meta name="theme-color" content="#e85d2c">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,wght@0,600;0,700;0,900;1,600&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="icon" href="/images/favicon-32.png" type="image/png">
+<link rel="stylesheet" href="/qr/css/qr-menu.css">
+<script>
+/* Sayfa boyanmadan dil ve temayi ayarlar; tema/dil sicramasini onler. */
+(function () {
+  try {
+    var kok = document.documentElement;
+    var d = localStorage.getItem('tantuni-qr-dil');
+    if (d !== 'tr' && d !== 'en') {
+      d = (navigator.language || '').toLowerCase().indexOf('en') === 0 ? 'en' : 'tr';
+    }
+    kok.lang = d;
+
+    var t = localStorage.getItem('tantuni-qr-tema');
+    if (t !== 'acik' && t !== 'koyu') {
+      t = (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) ? 'koyu' : 'acik';
+    }
+    kok.setAttribute('data-tema', t);
+  } catch (e) {}
+})();
+</script>
+</head>
+<body>
+
+<div class="kabuk">
+
+  <header class="baslik">
+    <div class="baslik-ust">
+      <img class="logo" src="/images/logo.webp" alt="Hisarönü Tantuni Yakup Usta logosu" width="48" height="48">
+      <div class="tercihler" id="tercihler"></div>
+    </div>
+    <h1 class="sube-baslik" id="sube-baslik">Hisarönü Tantuni Yakup Usta - Bostanlı</h1>
+  </header>
+
+  <noscript>
+    <p class="js-kapali">
+      Menüyü görüntülemek için tarayıcınızda JavaScript'in açık olması gerekiyor.
+      Fiyatlar tek bir dosyadan okunduğu için sayfa menüyü tarayıcıda oluşturuyor.
+      Menüye <a href="/menu.html">menü sayfamızdan</a> da bakabilirsiniz.
+    </p>
+  </noscript>
+
+  <div class="sekmeler" id="sekmeler" role="tablist"></div>
+
+  <main class="paneller" id="paneller">
+    <section class="panel" id="panel-et" role="tabpanel" tabindex="0"></section>
+    <section class="panel" id="panel-tavuk" role="tabpanel" tabindex="0"></section>
+    <section class="panel" id="panel-icecek" role="tabpanel" tabindex="0"></section>
+  </main>
+
+  <footer class="alt-bilgi" id="alt-bilgi"></footer>
+
+</div>
+
+<script src="/qr/js/menu-verisi.js"></script>
+<script src="/qr/js/sube-bostanli.js"></script>
+<script src="/qr/js/qr-menu.js"></script>
+</body>
+</html>
