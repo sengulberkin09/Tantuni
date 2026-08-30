@@ -75,6 +75,26 @@ bunlar JavaScript kapalıyken de görünsün diye HTML'e yazılı.
 `ICECEKLER`) yeni bir kayıt ekleyin. Görseli önce `images/menu/` klasörüne
 koyun. `node qr/kontrol.js` görselin gerçekten var olduğunu doğrular.
 
+## Stil değiştirirken dikkat
+
+Kategori sekmelerinin filtresi tamamen CSS ile çalışıyor: JavaScript yalnızca
+`#paneller` üzerindeki `data-aktif` değerini değiştiriyor, panelleri gösterip
+gizleyen `qr/css/qr-menu.css`.
+
+Bu üç kural bu sırayla ve bu özgüllükte kalmalı:
+
+```css
+.panel                              { display: grid; }   /* JS kapalı: hepsi açık */
+.paneller[data-aktif] .panel        { display: none; }   /* JS açık: hepsi gizli */
+.paneller[data-aktif="et"] #panel-et { display: grid; }  /* seçili olan geri açılır */
+```
+
+Panellere **id ile** (`#panel-et { ... }`) düzen kuralı yazmayın. Id özgüllüğü
+(0,1,0,0) gizleme kuralını (0,0,3,0) ezer; üç panel birden açık kalır ve sayfa
+hep ilk kategoride takılı kalmış gibi görünür — sekmeler tıklanır, `data-aktif`
+değişir, ama hiçbir şey olmaz. Düzen için `.urun-listesi` ve `.icecek-listesi`
+sınıflarını kullanın.
+
 ## Diller
 
 Ürün adları iki dilde de Türkçe kalır — menüde "Et Dürüm" yazar, "Beef Wrap"

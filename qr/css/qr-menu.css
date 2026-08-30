@@ -213,32 +213,41 @@ h1, h2 { font-family: var(--font-baslik); font-weight: 700; line-height: 1.15; m
 
 /* ---------- Paneller ---------- */
 /* data-aktif yalnızca JS çalışınca konur; yokken üç panel de görünür. */
+/* Görünürlük sırası önemli — özgüllükler artan olmalı, yoksa filtre çalışmaz.
+   Düzen kuralları BİLEREK sınıfla yazılıyor: id kullanılırsa (0,1,0,0)
+   aşağıdaki gizleme kuralını (0,0,3,0) ezer ve üç panel birden açık kalır. */
+
+/* JS kapalıyken data-aktif hiç konmaz; üç panel de görünür. */
+.panel {
+  display: grid;
+  padding-top: 16px;
+}
+
+/* JS çalışınca önce hepsi gizlenir... */
 .paneller[data-aktif] .panel { display: none; }
+
+/* ...sonra yalnızca seçili olan geri açılır. */
 .paneller[data-aktif="et"] #panel-et,
 .paneller[data-aktif="tavuk"] #panel-tavuk,
 .paneller[data-aktif="icecek"] #panel-icecek { display: grid; }
-
-.panel { padding-top: 16px; }
 
 .panel:focus-visible {
   outline: 2px solid var(--vurgu);
   outline-offset: 2px;
 }
 
-#panel-et, #panel-tavuk {
-  display: grid;
+.urun-listesi {
   grid-template-columns: 1fr;
   gap: 12px;
 }
 
-#panel-icecek {
-  display: grid;
+.icecek-listesi {
   grid-template-columns: repeat(2, 1fr);
   gap: 10px;
 }
 
 @media (min-width: 560px) {
-  #panel-icecek { grid-template-columns: repeat(3, 1fr); }
+  .icecek-listesi { grid-template-columns: repeat(3, 1fr); }
 }
 
 /* ---------- Tantuni ürün kartı ---------- */
