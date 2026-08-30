@@ -110,7 +110,7 @@ export type Porsiyon = {
 
 export type TantuniUrun = {
   id: string;
-  ad: Metin;
+  ad: string;                          // Türkçe, EN modda da aynı kalır
   aciklama: Metin;
   gorsel: string;                      // "/images/menu/et-tantuni-durum.webp"
   porsiyonlar: [Porsiyon, Porsiyon];   // tam iki porsiyon
@@ -118,7 +118,7 @@ export type TantuniUrun = {
 
 export type IcecekUrun = {
   id: string;
-  ad: Metin;
+  ad: string;                          // Türkçe, EN modda da aynı kalır
   gorsel: string;
   fiyat: number;                       // tek fiyat, porsiyon yok
 };
@@ -144,11 +144,11 @@ Fiyat değişim tarihi ortak sabit: `FIYAT_DEGISIM_TARIHI = '15/08/2026'`.
 
 **Et Ürünleri** (porsiyonlar: `Tek · 60 gr` / `İçi Bol · 90 gr`)
 
-| id | Ad (TR) | Ad (EN) | Görsel | Tek | İçi Bol |
-|----|---------|---------|--------|-----|---------|
-| `et-durum` | Et Dürüm | Beef Wrap | `et-tantuni-durum.webp` | 330 | 460 |
-| `et-ekmek-arasi` | Et Ekmek Arası | Beef Sandwich | `et-tantuni-ekmek-arasi.webp` | 330 | 460 |
-| `et-yogurtlu` | Et Yoğurtlu | Beef with Yoghurt | `et-tantuni-yogurtlu.webp` | 420 | 600 |
+| id | Ad | Görsel | Tek | İçi Bol |
+|----|----|--------|-----|---------|
+| `et-durum` | Et Dürüm | `et-tantuni-durum.webp` | 330 | 460 |
+| `et-ekmek-arasi` | Et Ekmek Arası | `et-tantuni-ekmek-arasi.webp` | 330 | 460 |
+| `et-yogurtlu` | Et Yoğurtlu | `et-tantuni-yogurtlu.webp` | 420 | 600 |
 
 Açıklamalar (TR mevcut `menu.html`'den birebir alınacak, uydurulmayacak):
 
@@ -161,11 +161,11 @@ Açıklamalar (TR mevcut `menu.html`'den birebir alınacak, uydurulmayacak):
 
 **Tavuk Ürünleri** (aynı porsiyon etiketleri)
 
-| id | Ad (TR) | Ad (EN) | Görsel | Tek | İçi Bol |
-|----|---------|---------|--------|-----|---------|
-| `tavuk-durum` | Tavuk Dürüm | Chicken Wrap | `tavuk-tantuni-durum.webp` | 240 | 330 |
-| `tavuk-ekmek-arasi` | Tavuk Ekmek Arası | Chicken Sandwich | `tavuk-tantuni-ekmek-arasi.webp` | 240 | 330 |
-| `tavuk-yogurtlu` | Tavuk Yoğurtlu | Chicken with Yoghurt | `tavuk-tantuni-yogurtlu.webp` | 320 | 450 |
+| id | Ad | Görsel | Tek | İçi Bol |
+|----|----|--------|-----|---------|
+| `tavuk-durum` | Tavuk Dürüm | `tavuk-tantuni-durum.webp` | 240 | 330 |
+| `tavuk-ekmek-arasi` | Tavuk Ekmek Arası | `tavuk-tantuni-ekmek-arasi.webp` | 240 | 330 |
+| `tavuk-yogurtlu` | Tavuk Yoğurtlu | `tavuk-tantuni-yogurtlu.webp` | 320 | 450 |
 
 - `tavuk-durum` — TR: "İnce lavaşta bol sebzeli tavuk tantuni."
   EN: "Chicken tantuni with plenty of vegetables in thin lavash."
@@ -176,18 +176,18 @@ Açıklamalar (TR mevcut `menu.html`'den birebir alınacak, uydurulmayacak):
 
 **İçecekler** (tek fiyat, açıklama yok)
 
-| id | Ad (TR) | Ad (EN) | Görsel | Fiyat |
-|----|---------|---------|--------|-------|
-| `ayran` | Ayran | Ayran | `ayran.webp` | 70 |
-| `salgam` | Şalgam | Turnip Juice | `salgam.webp` | 70 |
-| `kola` | Kola | Cola | `kola.webp` | 90 |
-| `fanta` | Fanta | Fanta | `fanta.webp` | 90 |
-| `nigde-gazozu` | Niğde Gazozu | Niğde Soda | `nigde-gazozu.webp` | 70 |
-| `ice-tea` | Ice Tea | Iced Tea | `ice-tea.webp` | 90 |
-| `sprite` | Sprite | Sprite | `sprite.webp` | 90 |
-| `meyve-suyu` | Meyve Suyu | Fruit Juice | `meyve-suyu.webp` | 90 |
-| `maden-suyu` | Maden Suyu | Sparkling Water | `maden-suyu.webp` | 40 |
-| `su` | Su | Water | `su.webp` | 25 |
+| id | Ad | Görsel | Fiyat |
+|----|----|--------|-------|
+| `ayran` | Ayran | `ayran.webp` | 70 |
+| `salgam` | Şalgam | `salgam.webp` | 70 |
+| `kola` | Kola | `kola.webp` | 90 |
+| `fanta` | Fanta | `fanta.webp` | 90 |
+| `nigde-gazozu` | Niğde Gazozu | `nigde-gazozu.webp` | 70 |
+| `ice-tea` | Ice Tea | `ice-tea.webp` | 90 |
+| `sprite` | Sprite | `sprite.webp` | 90 |
+| `meyve-suyu` | Meyve Suyu | `meyve-suyu.webp` | 90 |
+| `maden-suyu` | Maden Suyu | `maden-suyu.webp` | 40 |
+| `su` | Su | `su.webp` | 25 |
 
 ### Şube dosyaları
 
@@ -223,20 +223,30 @@ Sayfada TR/EN geçiş düğmesi bulunur. Varsayılan dil **Türkçe**.
 
 ### Neler çevrilir
 
-- Ürün adları ve açıklamaları (`menu.ts` içinde `{ tr, en }`)
+- **Ürün açıklamaları** (`menu.ts` içinde `aciklama: { tr, en }`) — çevrilen tek
+  ürün alanı. İçeceklerde açıklama olmadığı için onlarda çevrilecek bir şey yok.
 - Kategori adları: Et Ürünleri / Meat, Tavuk Ürünleri / Chicken, İçecekler / Drinks
 - Porsiyon etiketleri: "Tek · 60 gr" / "Single · 60 g",
   "İçi Bol · 90 gr" / "Extra Filling · 90 g"
 - Arayüz metinleri (`i18n.ts`): "Adres" / "Address",
   "Çalışma Saatleri" / "Opening Hours", "Telefon" / "Phone",
   "Yol tarifi" / "Directions", "Fiyat değişim tarihi" / "Prices effective from"
-- Görsel `alt` metinleri (aktif dildeki ürün adı)
 
 ### Neler çevrilmez
 
-Şube bilgileri sabit kalır: adres ve çalışma saatleri Türkçe yazıldığı gibi
+**Ürün adları her iki dilde de Türkçe kalır** — "Et Dürüm", "Tavuk Yoğurtlu",
+"Şalgam" EN modda da aynen böyle görünür. Bu nedenle `ad` alanı `Metin` değil düz
+`string`. Görsel `alt` metinleri de her zaman Türkçe ürün adını kullanır.
+
+Şube bilgileri de sabit kalır: adres ve çalışma saatleri Türkçe yazıldığı gibi
 görünür (ör. EN modda da "Her gün 10:30 – 20:15"). Etraflarındaki başlıklar
-çevrilir, değerleri çevrilmez — bu kasıtlı, hata değil.
+çevrilir, değerleri çevrilmez.
+
+Bunların üçü de kasıtlı, hata değil.
+
+Sonuç olarak EN mod, Türkçe ürün adlarının üstüne İngilizce açıklama ve arayüz
+giydiren bir görünüm olur — yabancı ziyaretçi ürünün adını garsona söylediği gibi
+okur, ne olduğunu açıklamadan anlar.
 
 ### Uygulama
 
@@ -249,10 +259,11 @@ Statik HTML **TR** olarak üretilir. `<head>` içindeki kısa bir inline script
 state'e alır. Seçim `localStorage`'a yazılır.
 
 **Bilinen ödünç:** İngilizce seçmiş bir ziyaretçi sayfaya tekrar girdiğinde
-hydration'a kadar (~100 ms) Türkçe metin görebilir. Sayfa tamamen yerel olduğu
-için bu pencere çok kısa. Rahatsız edici olursa alternatif, iki dilin metnini
-de DOM'a basıp `html[lang]` CSS kuralıyla göstermek — daha karmaşık olduğu için
-şimdilik tercih edilmedi.
+hydration'a kadar (~100 ms) Türkçe metin görebilir. Ürün adları zaten her iki
+dilde Türkçe kaldığı için bu geçiş yalnızca açıklamaları, kategori sekmelerini
+ve arayüz etiketlerini etkiler — sayfanın iskeleti oynamaz. Rahatsız edici
+olursa alternatif, iki dilin metnini de DOM'a basıp `html[lang]` CSS kuralıyla
+göstermek; daha karmaşık olduğu için şimdilik tercih edilmedi.
 
 Dil düğmesi TR|EN şeklinde segmented control olarak header'da, tema düğmesinin
 yanında durur.
@@ -316,7 +327,9 @@ Gerçek risk veride: eksik görsel, tipo fiyat, unutulmuş çeviri.
 
 - Her ürünün `gorsel` dosyası `public/` altında gerçekten var
 - Her fiyat pozitif tam sayı
-- Her `Metin` alanında hem `tr` hem `en` dolu (boş string reddedilir)
+- Her ürünün `ad` alanı boş olmayan string
+- Her `Metin` alanında (`aciklama`, porsiyon `etiket`, `i18n.ts` girdileri) hem
+  `tr` hem `en` dolu — boş string reddedilir
 - Tantuni ürünlerinde tam iki porsiyon var
 - Ürün `id`'leri benzersiz
 - Her şubede zorunlu alanların hepsi dolu, iki `slug` çakışmıyor
