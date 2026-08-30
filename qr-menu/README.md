@@ -10,12 +10,35 @@ Sipariş, sepet veya ödeme içermez.
 
 ## Geliştirme
 
-```bash
-cd qr-menu
+Aşağıdaki komutlar `qr-menu/` klasöründen çalıştırılır:
+
+```
 npm install
 npm run dev      # http://localhost:3000/qr/konak/
 npm test         # veri ve bileşen testleri
 ```
+
+### Komutları PowerShell'den çalıştırın, Git Bash'ten değil
+
+Bu projenin yolu Türkçe karakter içeriyor (`Masaüstü`). Git Bash, bu yolda
+vitest'in worker sürecini başlatamıyor: komut 60 saniye takılıyor ve **sıfır
+test çalıştırıyor**. Hata vermediği için testler geçmiş gibi görünebilir.
+
+`npm run build` de etkileniyor, çünkü `prebuild` adımı vitest çalıştırıyor.
+
+PowerShell'de sorun yok:
+
+```
+Set-Location 'C:\Users\sengu\OneDrive\Masaüstü\tantuni\qr-menu'
+npm run build
+```
+
+Bir test koşusunun sağlıklı olduğunu dosya sayısından anlarsınız: **7 test
+dosyası / 72 test**. Daha az dosya çalıştıysa koşu yarım kalmıştır, tekrar
+çalıştırın.
+
+`npm run build` yaklaşık **155 saniye** sürer (önce testler, sonra derleme).
+Takıldığını düşünüp yarıda kesmeyin.
 
 ## Fiyat veya ürün güncelleme
 
@@ -39,8 +62,12 @@ adımlarını tekrarlayın.
 
 `qr-menu/public/images/menu/` altındaki dosyalar repo kökündeki
 `images/menu/` klasörünün kopyasıdır. Ana sitede bir görsel değişirse
-buraya da kopyalanmalı:
+buraya da kopyalanmalı — bu komut **repo kökünden** çalıştırılır:
 
-```bash
-cp images/menu/*.webp qr-menu/public/images/menu/
 ```
+cp images/menu/*.webp qr-menu/public/images/menu/
+cp images/logo.webp qr-menu/public/images/logo.webp
+```
+
+Sonra yukarıdaki build adımlarını tekrarlayın, yoksa yayındaki sayfalar eski
+görseli göstermeye devam eder.
