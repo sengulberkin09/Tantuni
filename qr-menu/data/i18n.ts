@@ -13,5 +13,3 @@ export const ARAYUZ = {
   temayaGecKoyu: { tr: 'Karanlık temaya geç', en: 'Switch to dark theme' },
   temayaGecAcik: { tr: 'Aydınlık temaya geç', en: 'Switch to light theme' },
 } satisfies Record<string, Metin>;
-
-export type ArayuzAnahtari = keyof typeof ARAYUZ;

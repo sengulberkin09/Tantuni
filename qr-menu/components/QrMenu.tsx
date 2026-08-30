@@ -8,6 +8,7 @@ import { TercihKontrolleri } from '@/components/TercihKontrolleri';
 import { UrunKarti } from '@/components/UrunKarti';
 import { useTercihler } from '@/components/useTercihler';
 import { ARAYUZ } from '@/data/i18n';
+import { TEMEL_YOL } from '@/lib/temel-yol';
 import {
   ET_URUNLERI,
   FIYAT_DEGISIM_TARIHI,
@@ -17,8 +18,12 @@ import {
 } from '@/data/menu';
 import type { KategoriId, Sube } from '@/data/types';
 
-/** JS kapalıyken üç paneli de açar; aksi halde CSS yalnızca aktif olanı gösterir. */
-const NOSCRIPT_STILI = '.panel { display: block !important; }';
+/**
+ * JS kapalıyken üç paneli de açar; aksi halde CSS yalnızca aktif olanı gösterir.
+ * display değeri .urun-listesi / .icecek-listesi ile aynı kalmalı (grid) —
+ * block yaparsanız kartların gap'i ve içeceklerin iki sütunlu düzeni bozulur.
+ */
+const NOSCRIPT_STILI = '.panel { display: grid !important; }';
 
 export function QrMenu({ sube }: { sube: Sube }) {
   const { dil, tema, setDil, setTema } = useTercihler();
@@ -44,7 +49,7 @@ export function QrMenu({ sube }: { sube: Sube }) {
         <div className="baslik-ust">
           <Image
             className="logo"
-            src="/images/logo.webp"
+            src={`${TEMEL_YOL}/images/logo.webp`}
             alt="Hisarönü Tantuni Yakup Usta logosu"
             width={48}
             height={48}

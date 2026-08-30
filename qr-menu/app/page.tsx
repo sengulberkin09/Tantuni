@@ -4,6 +4,7 @@ import Link from 'next/link';
 
 import { ARAYUZ } from '@/data/i18n';
 import { SUBELER } from '@/data/subeler';
+import { TEMEL_YOL } from '@/lib/temel-yol';
 
 export const metadata: Metadata = {
   title: 'Hisarönü Tantuni Yakup Usta | Menü',
@@ -15,7 +16,7 @@ export default function SubeSecimSayfasi() {
     <div className="kabuk sube-secim">
       <Image
         className="logo secim-logo"
-        src="/images/logo.webp"
+        src={`${TEMEL_YOL}/images/logo.webp`}
         alt="Hisarönü Tantuni Yakup Usta logosu"
         width={72}
         height={72}

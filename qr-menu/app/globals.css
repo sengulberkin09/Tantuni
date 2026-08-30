@@ -7,6 +7,9 @@
   --flame: #e85d2c;
   --flame-dark: #c8481e;
   --gold: #f2b84b;
+  /* Metin için vurgu rengi: aydınlıkta flame-dark (4.77:1, AA geçer),
+     koyu temada flame (aşağıdaki bloklarda değişir). */
+  --vurgu: var(--flame-dark);
 
   /* Aydınlık tema token'ları */
   --zemin: #f3e9dd;
@@ -22,7 +25,6 @@
 
   --yaricap-sm: 8px;
   --yaricap-md: 14px;
-  --yaricap-lg: 22px;
 }
 
 /* Elle koyu seçildiğinde */
@@ -34,6 +36,8 @@
   --sonuk: #c9b8a8;
   --cizgi: rgba(243, 233, 221, 0.14);
   --golge: 0 6px 18px rgba(0, 0, 0, 0.35);
+  /* Koyu zeminde flame-dark yalnızca 3.57:1 verir; flame 4.89:1 ile AA geçer. */
+  --vurgu: var(--flame);
 }
 
 /* JS kapalıysa inline script çalışmaz; sistem tercihi devreye girsin. */
@@ -46,6 +50,8 @@
     --sonuk: #c9b8a8;
     --cizgi: rgba(243, 233, 221, 0.14);
     --golge: 0 6px 18px rgba(0, 0, 0, 0.35);
+    /* Koyu zeminde flame-dark yalnızca 3.57:1 verir; flame 4.89:1 ile AA geçer. */
+    --vurgu: var(--flame);
   }
 }
 
@@ -71,16 +77,6 @@ h1, h2, h3 {
   font-weight: 700;
   line-height: 1.15;
   margin: 0;
-}
-
-.gorunmez {
-  position: absolute;
-  width: 1px; height: 1px;
-  padding: 0; margin: -1px;
-  overflow: hidden;
-  clip: rect(0 0 0 0);
-  white-space: nowrap;
-  border: 0;
 }
 
 .kabuk {
@@ -119,7 +115,7 @@ h1, h2, h3 {
 }
 
 .dil-dugme[aria-pressed="true"] {
-  background: var(--flame);
+  background: var(--flame-dark);
   color: #fff;
 }
 
@@ -203,7 +199,7 @@ h1, h2, h3 {
   font-family: var(--font-baslik);
   font-size: 15px;
   font-weight: 700;
-  color: var(--flame);
+  color: var(--vurgu);
 }
 
 /* ---------- İçecek kartı ---------- */
@@ -236,7 +232,7 @@ h1, h2, h3 {
   font-family: var(--font-baslik);
   font-size: 15px;
   font-weight: 700;
-  color: var(--flame);
+  color: var(--vurgu);
 }
 
 /* ---------- Başlık ---------- */
@@ -304,8 +300,8 @@ h1, h2, h3 {
 }
 
 .sekme[aria-selected="true"] {
-  background: var(--flame);
-  border-color: var(--flame);
+  background: var(--flame-dark);
+  border-color: var(--flame-dark);
   color: #fff;
 }
 
@@ -358,7 +354,7 @@ h1, h2, h3 {
   font-weight: 700;
   letter-spacing: 0.08em;
   text-transform: uppercase;
-  color: var(--flame);
+  color: var(--vurgu);
   margin-top: 14px;
 }
 
@@ -383,7 +379,7 @@ h1, h2, h3 {
 .yol-tarifi {
   font-size: 12px;
   font-weight: 600;
-  color: var(--flame);
+  color: var(--vurgu);
   border-bottom: 1px solid currentColor;
 }
 
@@ -445,4 +441,4 @@ h1, h2, h3 {
 }
 
 .secim-sube-adres { font-size: 13px; color: var(--sonuk); }
-.secim-sube-saat { font-size: 13px; color: var(--flame); font-weight: 600; }
+.secim-sube-saat { font-size: 13px; color: var(--vurgu); font-weight: 600; }

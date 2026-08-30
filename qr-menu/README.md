@@ -40,6 +40,21 @@ dosyası / 72 test**. Daha az dosya çalıştıysa koşu yarım kalmıştır, te
 `npm run build` yaklaşık **155 saniye** sürer (önce testler, sonra derleme).
 Takıldığını düşünüp yarıda kesmeyin.
 
+## `.nojekyll` dosyasını silmeyin
+
+Repo kökünde (bu klasörün bir üstünde) boş bir `.nojekyll` dosyası var.
+GitHub Pages branch tabanlı yayında varsayılan olarak Jekyll çalıştırır ve
+Jekyll, adı alt çizgiyle başlayan klasörleri (`_next/` gibi) yayına
+kopyalamaz. Bu sayfaların CSS'i ve JS'i tam olarak `_next/` altında —
+`.nojekyll` yoksa Jekyll devreye girer, `_next/` yayından düşer, menü
+stilsiz ve etkileşimsiz kalır (sekmeler, dil ve tema geçişi çalışmaz).
+
+`.nojekyll` bilinçli olarak `qr-menu/` içinde değil **repo kökünde**:
+`scripts/copy-out.mjs` her build'de `qr/` klasörünü tamamen silip yeniden
+oluşturuyor (`rm(hedef, { recursive: true, force: true })`), o yüzden
+`qr/.nojekyll` bir sonraki build'de kaybolurdu. Repo kökü bu silme
+işleminin dışında, dosya orada kalıcı.
+
 ## Fiyat veya ürün güncelleme
 
 1. `qr-menu/data/menu.ts` içinde fiyatı/ürünü değiştirin — burası tek kaynak,

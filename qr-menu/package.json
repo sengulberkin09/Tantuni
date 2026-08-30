@@ -4,10 +4,10 @@
   "private": true,
   "scripts": {
     "dev": "next dev",
-    "prebuild": "vitest run --passWithNoTests",
+    "prebuild": "vitest run",
     "build": "next build",
     "postbuild": "node scripts/copy-out.mjs",
-    "test": "vitest run --passWithNoTests",
+    "test": "vitest run",
     "test:watch": "vitest"
   },
   "dependencies": {

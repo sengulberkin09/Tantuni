@@ -2,6 +2,7 @@ import type { Metadata, Viewport } from 'next';
 import type { ReactNode } from 'react';
 
 import { TERCIH_SCRIPTI } from '@/lib/tercihler';
+import { TEMEL_YOL } from '@/lib/temel-yol';
 import './globals.css';
 
 export const metadata: Metadata = {
@@ -9,7 +10,7 @@ export const metadata: Metadata = {
   // QR menü, mevcut menu.html ile aynı içeriği taşıyor; arama sonuçlarında
   // ana site görünsün diye bu sayfalar indekslenmiyor.
   robots: { index: false, follow: false },
-  icons: { icon: '/images/logo.webp' },
+  icons: { icon: `${TEMEL_YOL}/images/logo.webp` },
 };
 
 export const viewport: Viewport = {

@@ -1,6 +1,7 @@
 import Image from 'next/image';
 
 import type { Dil, TantuniUrun } from '@/data/types';
+import { TEMEL_YOL } from '@/lib/temel-yol';
 
 type Props = {
   urun: TantuniUrun;
@@ -14,7 +15,7 @@ export function UrunKarti({ urun, dil, oncelikli = false }: Props) {
     <article className="urun-karti">
       <Image
         className="urun-gorsel"
-        src={urun.gorsel}
+        src={`${TEMEL_YOL}${urun.gorsel}`}
         // Ürün adları çevrilmediği için alt metin de her dilde Türkçe.
         alt={urun.ad}
         width={92}

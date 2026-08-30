@@ -66,6 +66,12 @@ describe('menü verisi', () => {
     }
   });
 
+  it('tantuni ürünlerinde tr ve en açıklama birbirinden farklı', () => {
+    for (const u of TANTUNILER) {
+      expect(u.aciklama.tr, u.id).not.toBe(u.aciklama.en);
+    }
+  });
+
   it('tantuni ürünlerinde tam iki porsiyon var ve etiketleri iki dilde dolu', () => {
     for (const u of TANTUNILER) {
       expect(u.porsiyonlar, u.id).toHaveLength(2);
