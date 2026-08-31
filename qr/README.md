@@ -152,9 +152,6 @@ boş çeviriyi yakalar, ama Türkçe metnin İngilizce alanına yapıştırılma
 yalnızca açıklamalarda yakalayabilir (ürün adlarında marka adları yüzünden
 aynı olmak meşru).
 
-Ziyaretçinin tarayıcı dili İngilizce ise sayfa İngilizce açılır; seçim
-tarayıcıda hatırlanır.
-
 ## JavaScript kapalıysa
 
 Menü tarayıcıda çiziliyor, çünkü build adımı olmadan fiyatları tek dosyada
@@ -182,6 +179,12 @@ ve `/qr/konak/` sayfasını açın:
 - [ ] Tema düğmesi karanlık moda geçiriyor
 - [ ] Sayfayı yenileyince dil ve tema seçimi korunuyor
 - [ ] Fiyatlar okunaklı, ürün görselleri yükleniyor
+- [ ] Ürün fotoğrafına dokununca büyüyor; X, dışına dokunma ve `Esc` kapatıyor
+
+Bir şey güncellemediği halde eski görünüyorsa **önce sert yenileme yapın**
+(`Ctrl+Shift+R`, telefonda sekmeyi kapatıp açın). Sürüm damgası bunu
+önlüyor ama siz damgayı güncellemeden yayınladıysanız tarayıcı eski dosyayı
+tutuyor olabilir.
 
 `/qr/bostanli/` sayfasında:
 
