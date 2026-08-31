@@ -150,8 +150,9 @@ ve `/qr/konak/` sayfasını açın:
 - [ ] "İçecekler"e basınca yalnızca içecekler görünüyor
 - [ ] Sol/sağ ok tuşlarıyla sekmeler arasında geçiliyor
 - [ ] "EN"e basınca açıklamalar ve sekme adları İngilizce oluyor
-- [ ] EN modunda ürün adları Türkçe kalıyor ("Et Dürüm", "Şalgam")
-- [ ] EN modunda adres ve çalışma saatleri de Türkçe kalıyor
+- [ ] EN modunda ürün adları da İngilizce ("Beef Wrap", "Turnip Juice")
+- [ ] EN modunda çalışma saatleri İngilizce ("Daily ...")
+- [ ] EN modunda adres Türkçe kalıyor (bilerek böyle)
 - [ ] Tema düğmesi karanlık moda geçiriyor
 - [ ] Sayfayı yenileyince dil ve tema seçimi korunuyor
 - [ ] Fiyatlar okunaklı, ürün görselleri yükleniyor
