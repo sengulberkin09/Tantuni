@@ -47,7 +47,9 @@ bildir(new Set(idler).size === idler.length, 'tekrar eden ürün id var');
 
 /* Her ürün */
 tumUrunler.forEach(u => {
-  bildir(typeof u.ad === 'string' && u.ad.trim() !== '', u.id + ' — ad boş');
+  /* Ad iki dilde; marka adlarında (Fanta, Sprite) tr ve en aynı olabilir,
+     o yüzden burada farklılık aranmıyor. */
+  metinGecerli(u.ad, u.id + ' adı');
   const dosya = path.join(kok, u.gorsel.replace(/^\//, ''));
   bildir(fs.existsSync(dosya), u.id + ' — görsel diskte yok: ' + u.gorsel);
 });
@@ -94,13 +96,19 @@ bildir(
   const sube = new Function(
     fs.readFileSync(dosya, 'utf8') + ';return SUBE;'
   )();
-  ['slug', 'ad', 'baslik', 'adres', 'mapsUrl', 'telefonGosterim', 'telefonTel', 'calismaSaatleri']
+  ['slug', 'ad', 'baslik', 'adres', 'mapsUrl', 'telefonGosterim', 'telefonTel']
     .forEach(alan => {
       bildir(
         typeof sube[alan] === 'string' && sube[alan].trim() !== '',
         slug + '.' + alan + ' boş'
       );
     });
+  /* Çalışma saatleri iki dilde; adres bilerek tek dilde. */
+  metinGecerli(sube.calismaSaatleri, slug + '.calismaSaatleri');
+  bildir(
+    sube.calismaSaatleri.tr !== sube.calismaSaatleri.en,
+    slug + '.calismaSaatleri — tr ve en aynı, çeviri unutulmuş olabilir'
+  );
   bildir(sube.slug === slug, slug + ' — slug dosya adıyla uyuşmuyor');
   bildir(
     /^\+90\d{10}$/.test(sube.telefonTel),

@@ -109,13 +109,22 @@ sınıflarını kullanın.
 
 ## Diller
 
-Ürün adları iki dilde de Türkçe kalır — menüde "Et Dürüm" yazar, "Beef Wrap"
-değil. Yabancı ziyaretçi ürünün adını garsona söylediği gibi okur.
+Çevrilenler: ürün adları, açıklamalar, porsiyon etiketleri, kategori adları,
+çalışma saatleri, arayüz metinleri.
 
-Çevrilenler: ürün açıklamaları, porsiyon etiketleri, kategori adları, arayüz
-metinleri.
+**Çevrilmeyen tek şey adres.** Tabelada ve haritada yazdığı gibi görünmesi
+gerekiyor; ziyaretçi taksiciye ya da haritaya bu metni gösteriyor.
 
-Çevrilmeyenler: ürün adları, şube adresi, çalışma saatleri.
+Metin alanlarının hepsi `{ tr: '...', en: '...' }` biçiminde. Marka adlarında
+(Fanta, Sprite, Ice Tea) iki dil aynı, bu normaldir.
+
+Ziyaretçinin tarayıcı dili İngilizce ise sayfa İngilizce açılır; seçim
+tarayıcıda hatırlanır.
+
+Yeni ürün eklerken `en` alanını doldurmayı unutmayın — `node qr/kontrol.js`
+boş çeviriyi yakalar, ama Türkçe metnin İngilizce alanına yapıştırılmasını
+yalnızca açıklamalarda yakalayabilir (ürün adlarında marka adları yüzünden
+aynı olmak meşru).
 
 Ziyaretçinin tarayıcı dili İngilizce ise sayfa İngilizce açılır; seçim
 tarayıcıda hatırlanır.

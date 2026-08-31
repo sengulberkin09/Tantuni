@@ -8,9 +8,8 @@
    Şube bilgileri burada DEĞİL — onlar sube-konak.js ve sube-bostanli.js
    dosyalarında, çünkü şubeden şubeye değişiyorlar.
 
-   Ürün adları iki dilde de Türkçe kalır (menüde "Et Dürüm" yazar, "Beef Wrap"
-   değil). Yalnızca açıklamalar, porsiyon etiketleri, kategori adları ve arayüz
-   metinleri çevrilir.
+   Metin alanlarının hepsi { tr, en } biçiminde. Marka adlarında (Fanta,
+   Sprite, Ice Tea) iki dil aynı olabilir, bu normaldir.
    ========================================================================== */
 
 var FIYAT_DEGISIM_TARIHI = '15/08/2026';
@@ -35,7 +34,7 @@ var KATEGORILER = [
 var ET_URUNLERI = [
   {
     id: 'et-durum',
-    ad: 'Et Dürüm',
+    ad: { tr: 'Et Dürüm', en: 'Beef Wrap' },
     aciklama: {
       tr: 'İnce lavaşta bol sebzeli, baharatlı et tantuni.',
       en: 'Spiced beef tantuni with plenty of vegetables in thin lavash.'
@@ -45,7 +44,7 @@ var ET_URUNLERI = [
   },
   {
     id: 'et-ekmek-arasi',
-    ad: 'Et Ekmek Arası',
+    ad: { tr: 'Et Ekmek Arası', en: 'Beef Sandwich' },
     aciklama: {
       tr: 'Taze ekmek arasında bol sebzeli, baharatlı et tantuni.',
       en: 'Spiced beef tantuni with plenty of vegetables in fresh bread.'
@@ -55,7 +54,7 @@ var ET_URUNLERI = [
   },
   {
     id: 'et-yogurtlu',
-    ad: 'Et Yoğurtlu',
+    ad: { tr: 'Et Yoğurtlu', en: 'Beef with Yoghurt' },
     aciklama: {
       tr: 'Taze pişmiş et, ev yapımı yoğurt ve taze lavaş ile.',
       en: 'Freshly cooked beef served with homemade yoghurt and fresh lavash.'
@@ -68,7 +67,7 @@ var ET_URUNLERI = [
 var TAVUK_URUNLERI = [
   {
     id: 'tavuk-durum',
-    ad: 'Tavuk Dürüm',
+    ad: { tr: 'Tavuk Dürüm', en: 'Chicken Wrap' },
     aciklama: {
       tr: 'İnce lavaşta bol sebzeli tavuk tantuni.',
       en: 'Chicken tantuni with plenty of vegetables in thin lavash.'
@@ -78,7 +77,7 @@ var TAVUK_URUNLERI = [
   },
   {
     id: 'tavuk-ekmek-arasi',
-    ad: 'Tavuk Ekmek Arası',
+    ad: { tr: 'Tavuk Ekmek Arası', en: 'Chicken Sandwich' },
     aciklama: {
       tr: 'Taze ekmek arasında bol sebzeli tavuk tantuni.',
       en: 'Chicken tantuni with plenty of vegetables in fresh bread.'
@@ -88,7 +87,7 @@ var TAVUK_URUNLERI = [
   },
   {
     id: 'tavuk-yogurtlu',
-    ad: 'Tavuk Yoğurtlu',
+    ad: { tr: 'Tavuk Yoğurtlu', en: 'Chicken with Yoghurt' },
     aciklama: {
       tr: 'Yumuşacık tavuk, yoğurt ve kavrulmuş biberlerle.',
       en: 'Tender chicken with yoghurt and roasted peppers.'
@@ -100,19 +99,19 @@ var TAVUK_URUNLERI = [
 
 /* İçeceklerde açıklama yok ve tek fiyat var. */
 var ICECEKLER = [
-  { id: 'ayran', ad: 'Ayran', gorsel: '/images/menu/ayran.webp', fiyat: 70 },
-  { id: 'salgam', ad: 'Şalgam', gorsel: '/images/menu/salgam.webp', fiyat: 70 },
-  { id: 'kola', ad: 'Kola', gorsel: '/images/menu/kola.webp', fiyat: 90 },
-  { id: 'fanta', ad: 'Fanta', gorsel: '/images/menu/fanta.webp', fiyat: 90 },
-  { id: 'nigde-gazozu', ad: 'Niğde Gazozu', gorsel: '/images/menu/nigde-gazozu.webp', fiyat: 70 },
-  { id: 'ice-tea', ad: 'Ice Tea', gorsel: '/images/menu/ice-tea.webp', fiyat: 90 },
-  { id: 'sprite', ad: 'Sprite', gorsel: '/images/menu/sprite.webp', fiyat: 90 },
-  { id: 'meyve-suyu', ad: 'Meyve Suyu', gorsel: '/images/menu/meyve-suyu.webp', fiyat: 90 },
-  { id: 'maden-suyu', ad: 'Maden Suyu', gorsel: '/images/menu/maden-suyu.webp', fiyat: 40 },
-  { id: 'su', ad: 'Su', gorsel: '/images/menu/su.webp', fiyat: 25 }
+  { id: 'ayran', ad: { tr: 'Ayran', en: 'Ayran (Yoghurt Drink)' }, gorsel: '/images/menu/ayran.webp', fiyat: 70 },
+  { id: 'salgam', ad: { tr: 'Şalgam', en: 'Turnip Juice' }, gorsel: '/images/menu/salgam.webp', fiyat: 70 },
+  { id: 'kola', ad: { tr: 'Kola', en: 'Coke' }, gorsel: '/images/menu/kola.webp', fiyat: 90 },
+  { id: 'fanta', ad: { tr: 'Fanta', en: 'Fanta' }, gorsel: '/images/menu/fanta.webp', fiyat: 90 },
+  { id: 'nigde-gazozu', ad: { tr: 'Niğde Gazozu', en: 'Niğde Soda' }, gorsel: '/images/menu/nigde-gazozu.webp', fiyat: 70 },
+  { id: 'ice-tea', ad: { tr: 'Ice Tea', en: 'Ice Tea' }, gorsel: '/images/menu/ice-tea.webp', fiyat: 90 },
+  { id: 'sprite', ad: { tr: 'Sprite', en: 'Sprite' }, gorsel: '/images/menu/sprite.webp', fiyat: 90 },
+  { id: 'meyve-suyu', ad: { tr: 'Meyve Suyu', en: 'Fruit Juice' }, gorsel: '/images/menu/meyve-suyu.webp', fiyat: 90 },
+  { id: 'maden-suyu', ad: { tr: 'Maden Suyu', en: 'Mineral Water' }, gorsel: '/images/menu/maden-suyu.webp', fiyat: 40 },
+  { id: 'su', ad: { tr: 'Su', en: 'Water' }, gorsel: '/images/menu/su.webp', fiyat: 25 }
 ];
 
-/* Arayüz metinleri. Ürün adları burada yok — onlar çevrilmiyor. */
+/* Arayüz metinleri. */
 var ARAYUZ = {
   kategoriler: { tr: 'Kategoriler', en: 'Categories' },
   adres: { tr: 'Adres', en: 'Address' },

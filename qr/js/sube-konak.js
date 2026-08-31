@@ -1,5 +1,6 @@
 /* Konak şubesi bilgileri.
-   Adres ve çalışma saatleri çevrilmiyor — İngilizce modda da böyle görünür. */
+   Çalışma saatleri iki dilde tutuluyor. Adres çevrilmiyor — tabelada ve
+   haritada yazdığı gibi görünmesi gerekiyor. */
 
 var SUBE = {
   slug: 'konak',
@@ -10,5 +11,5 @@ var SUBE = {
     + encodeURIComponent('Konak, 902. Sk. No:7, 35250 Konak/İzmir'),
   telefonGosterim: '0552 888 35 33',
   telefonTel: '+905528883533',
-  calismaSaatleri: 'Her gün 10:30 – 20:15'
+  calismaSaatleri: { tr: 'Her gün 10:30 – 20:15', en: 'Daily 10:30 AM – 8:15 PM' }
 };

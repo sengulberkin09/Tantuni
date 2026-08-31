@@ -69,7 +69,6 @@
     kutu.appendChild(resim);
 
     var ad = el('p', 'lightbox-ad');
-    ad.lang = 'tr'; /* Ürün adları her iki dilde de Türkçe. */
     kutu.appendChild(ad);
     katman.appendChild(kutu);
 
@@ -102,9 +101,9 @@
   function lightboxAc(urun, acanDugme) {
     var lb = lightboxKur();
     lb.resim.src = urun.gorsel;
-    lb.resim.alt = urun.ad;
-    lb.ad.textContent = urun.ad;
-    lb.katman.setAttribute('aria-label', urun.ad);
+    lb.resim.alt = urun.ad[dil];
+    lb.ad.textContent = urun.ad[dil];
+    lb.katman.setAttribute('aria-label', urun.ad[dil]);
     lb.kapat.setAttribute('aria-label', ARAYUZ.kapat[dil]);
     lb.kapat.title = ARAYUZ.kapat[dil];
 
@@ -128,9 +127,9 @@
   function gorselDugmesi(urun, boyut, sinif, oncelikli) {
     var dugme = el('button', 'gorsel-dugme');
     dugme.type = 'button';
-    dugme.setAttribute('aria-label', ARAYUZ.gorseliBuyut[dil] + ': ' + urun.ad);
+    dugme.setAttribute('aria-label', ARAYUZ.gorseliBuyut[dil] + ': ' + urun.ad[dil]);
 
-    var img = gorselKur(urun.gorsel, urun.ad, boyut, oncelikli);
+    var img = gorselKur(urun.gorsel, urun.ad[dil], boyut, oncelikli);
     img.className = sinif;
     dugme.appendChild(img);
 
@@ -149,10 +148,7 @@
 
     var govde = el('div', 'urun-govde');
 
-    /* Ürün adı her iki dilde de Türkçe; lang="tr" ekran okuyucu için. */
-    var ad = metin('h2', 'urun-ad', urun.ad);
-    ad.lang = 'tr';
-    govde.appendChild(ad);
+    govde.appendChild(metin('h2', 'urun-ad', urun.ad[dil]));
 
     govde.appendChild(metin('p', 'urun-aciklama', urun.aciklama[dil]));
 
@@ -174,9 +170,7 @@
 
     kart.appendChild(gorselDugmesi(urun, 56, 'icecek-gorsel', false));
 
-    var ad = metin('span', 'icecek-ad', urun.ad);
-    ad.lang = 'tr';
-    kart.appendChild(ad);
+    kart.appendChild(metin('span', 'icecek-ad', urun.ad[dil]));
 
     kart.appendChild(metin('span', 'icecek-fiyat', fiyatYaz(urun.fiyat)));
     return kart;
@@ -265,9 +259,7 @@
     liste.appendChild(adresSatiri);
 
     liste.appendChild(metin('dt', null, ARAYUZ.calismaSaatleri[dil]));
-    var saatSatiri = metin('dd', null, SUBE.calismaSaatleri);
-    saatSatiri.lang = 'tr';
-    liste.appendChild(saatSatiri);
+    liste.appendChild(metin('dd', null, SUBE.calismaSaatleri[dil]));
 
     liste.appendChild(metin('dt', null, ARAYUZ.telefon[dil]));
     var telSatiri = el('dd');
