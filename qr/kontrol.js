@@ -116,6 +116,17 @@ bildir(
   );
 });
 
+/* Önbellek kırıcı sürüm damgaları güncel mi?
+   Bayat damga, ziyaretçilerin eski fiyatı görmesi demek. */
+const { surumleriIsle } = require('./surum.js');
+const surum = surumleriIsle(false);
+surum.eksik.forEach(e => bildir(false, 'HTML\'de olmayan dosyaya bağlantı — ' + e));
+bildir(
+  surum.guncellenen.length === 0,
+  'sürüm damgaları bayat (' + surum.guncellenen.length + ' bağlantı). ' +
+  'Düzeltmek için: node qr/surum.js'
+);
+
 if (hata === 0) {
   console.log('Tüm kontroller geçti.');
   console.log(
