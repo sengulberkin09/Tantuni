@@ -265,10 +265,12 @@ h1, h2 { font-family: var(--font-baslik); font-weight: 700; line-height: 1.15; m
 .urun-gorsel {
   width: 92px;
   height: 92px;
-  flex: 0 0 92px;
   object-fit: cover;
   border-radius: var(--yaricap-sm);
 }
+
+/* Görseller <button> içinde: flex boyutunu artık düğme taşıyor. */
+.urun-karti > .gorsel-dugme { flex: 0 0 92px; }
 
 .urun-govde { min-width: 0; flex: 1; }
 
@@ -369,6 +371,101 @@ h1, h2 { font-family: var(--font-baslik); font-weight: 700; line-height: 1.15; m
 }
 
 .fiyat-tarihi { margin: 22px 0 0; font-size: 12px; color: var(--sonuk); }
+
+/* ---------- Fotoğraf büyütme (lightbox) ---------- */
+
+.gorsel-dugme {
+  display: block;
+  padding: 0;
+  border: 0;
+  background: none;
+  border-radius: var(--yaricap-sm);
+  cursor: zoom-in;
+  transition: transform 160ms ease;
+  /* iOS'ta dokununca gri parlama olmasın. */
+  -webkit-tap-highlight-color: transparent;
+}
+
+.gorsel-dugme:hover { transform: scale(1.04); }
+.gorsel-dugme:active { transform: scale(0.98); }
+
+.gorsel-dugme:focus-visible {
+  outline: 2px solid var(--vurgu);
+  outline-offset: 3px;
+}
+
+/* Lightbox açıkken arkadaki sayfa kaymasın. */
+body.lightbox-acik { overflow: hidden; }
+
+.lightbox {
+  position: fixed;
+  inset: 0;
+  z-index: 100;
+  display: grid;
+  place-items: center;
+  padding: 24px 20px;
+  background: rgba(28, 20, 16, 0.9);
+  -webkit-backdrop-filter: blur(3px);
+  backdrop-filter: blur(3px);
+}
+
+/* display:grid, hidden'ı ezeceği için açıkça geri alınıyor. */
+.lightbox[hidden] { display: none; }
+
+.lightbox-kutu {
+  max-width: min(560px, 100%);
+  /* Dokunuş kutunun kendisine gelirse de kapanıyor; imleç bunu belli etsin. */
+  cursor: zoom-out;
+}
+
+.lightbox-resim {
+  width: 100%;
+  height: auto;
+  max-height: 72vh;
+  object-fit: contain;
+  border-radius: var(--yaricap-md);
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.55);
+  cursor: default;
+}
+
+.lightbox-ad {
+  margin: 14px 0 0;
+  text-align: center;
+  color: #f3e9dd;
+  font-family: var(--font-baslik);
+  font-size: 17px;
+  font-weight: 700;
+}
+
+.lightbox-kapat {
+  position: fixed;
+  top: 14px;
+  right: 14px;
+  width: 44px;
+  height: 44px;
+  display: grid;
+  place-items: center;
+  border: 0;
+  border-radius: 50%;
+  background: var(--flame);
+  color: #fff;
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.45);
+  -webkit-tap-highlight-color: transparent;
+}
+
+.lightbox-kapat:hover { background: var(--flame-dark); }
+
+.lightbox-kapat:focus-visible {
+  outline: 2px solid #fff;
+  outline-offset: 3px;
+}
+
+/* Hareketi azaltma tercihi olanlarda büyüme animasyonu olmasın. */
+@media (prefers-reduced-motion: reduce) {
+  .gorsel-dugme { transition: none; }
+  .gorsel-dugme:hover,
+  .gorsel-dugme:active { transform: none; }
+}
 
 /* ---------- Şube seçim sayfası ---------- */
 .sube-secim { padding-top: 48px; text-align: center; }

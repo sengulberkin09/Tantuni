@@ -75,6 +75,18 @@ bunlar JavaScript kapalıyken de görünsün diye HTML'e yazılı.
 `ICECEKLER`) yeni bir kayıt ekleyin. Görseli önce `images/menu/` klasörüne
 koyun. `node qr/kontrol.js` görselin gerçekten var olduğunu doğrular.
 
+## Fotoğraf büyütme
+
+Ürün fotoğrafına dokununca büyük hali koyu bir katman üzerinde açılır. Kapatma:
+sağ üstteki X, görselin dışına dokunma veya `Esc`.
+
+Fotoğraflar `<button>` içine sarılıyor — ekran okuyucu ve klavye kullanıcısı
+tıklanabilir olduğunu böyle anlıyor. Katman `qr/js/qr-menu.js` içinde bir kez
+kurulup `<body>`ye ekleniyor, ekstra kütüphane yok.
+
+Yeni bir ürün eklediğinizde ayrıca bir şey yapmanız gerekmez; fotoğraf
+büyütme tüm ürünlere kendiliğinden uygulanır.
+
 ## Stil değiştirirken dikkat
 
 Kategori sekmelerinin filtresi tamamen CSS ile çalışıyor: JavaScript yalnızca
@@ -97,13 +109,22 @@ sınıflarını kullanın.
 
 ## Diller
 
-Ürün adları iki dilde de Türkçe kalır — menüde "Et Dürüm" yazar, "Beef Wrap"
-değil. Yabancı ziyaretçi ürünün adını garsona söylediği gibi okur.
+Çevrilenler: ürün adları, açıklamalar, porsiyon etiketleri, kategori adları,
+çalışma saatleri, arayüz metinleri.
 
-Çevrilenler: ürün açıklamaları, porsiyon etiketleri, kategori adları, arayüz
-metinleri.
+**Çevrilmeyen tek şey adres.** Tabelada ve haritada yazdığı gibi görünmesi
+gerekiyor; ziyaretçi taksiciye ya da haritaya bu metni gösteriyor.
 
-Çevrilmeyenler: ürün adları, şube adresi, çalışma saatleri.
+Metin alanlarının hepsi `{ tr: '...', en: '...' }` biçiminde. Marka adlarında
+(Fanta, Sprite, Ice Tea) iki dil aynı, bu normaldir.
+
+Ziyaretçinin tarayıcı dili İngilizce ise sayfa İngilizce açılır; seçim
+tarayıcıda hatırlanır.
+
+Yeni ürün eklerken `en` alanını doldurmayı unutmayın — `node qr/kontrol.js`
+boş çeviriyi yakalar, ama Türkçe metnin İngilizce alanına yapıştırılmasını
+yalnızca açıklamalarda yakalayabilir (ürün adlarında marka adları yüzünden
+aynı olmak meşru).
 
 Ziyaretçinin tarayıcı dili İngilizce ise sayfa İngilizce açılır; seçim
 tarayıcıda hatırlanır.
@@ -129,8 +150,9 @@ ve `/qr/konak/` sayfasını açın:
 - [ ] "İçecekler"e basınca yalnızca içecekler görünüyor
 - [ ] Sol/sağ ok tuşlarıyla sekmeler arasında geçiliyor
 - [ ] "EN"e basınca açıklamalar ve sekme adları İngilizce oluyor
-- [ ] EN modunda ürün adları Türkçe kalıyor ("Et Dürüm", "Şalgam")
-- [ ] EN modunda adres ve çalışma saatleri de Türkçe kalıyor
+- [ ] EN modunda ürün adları da İngilizce ("Beef Wrap", "Turnip Juice")
+- [ ] EN modunda çalışma saatleri İngilizce ("Daily ...")
+- [ ] EN modunda adres Türkçe kalıyor (bilerek böyle)
 - [ ] Tema düğmesi karanlık moda geçiriyor
 - [ ] Sayfayı yenileyince dil ve tema seçimi korunuyor
 - [ ] Fiyatlar okunaklı, ürün görselleri yükleniyor

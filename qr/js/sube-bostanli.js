@@ -1,5 +1,6 @@
 /* Bostanlı şubesi bilgileri.
-   Adres ve çalışma saatleri çevrilmiyor — İngilizce modda da böyle görünür. */
+   Çalışma saatleri iki dilde tutuluyor. Adres çevrilmiyor — tabelada ve
+   haritada yazdığı gibi görünmesi gerekiyor. */
 
 var SUBE = {
   slug: 'bostanli',
@@ -10,5 +11,5 @@ var SUBE = {
     + encodeURIComponent('Bostanlı, Cemal Gürsel Cd. No:530B, 35590 Karşıyaka/İzmir'),
   telefonGosterim: '+90 541 762 37 75',
   telefonTel: '+905417623775',
-  calismaSaatleri: 'Her gün, kapanış 01:30'
+  calismaSaatleri: { tr: 'Her gün, kapanış 01:30', en: 'Daily, closing at 01:30' }
 };
