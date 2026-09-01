@@ -18,11 +18,16 @@ var FIYAT_DEGISIM_TARIHI = '15/08/2026';
 var ETIKET_TEK = { tr: 'Tek · 60 gr', en: 'Single · 60 g' };
 var ETIKET_BOL = { tr: 'İçi Bol · 90 gr', en: 'Extra Filling · 90 g' };
 
-function porsiyonlarKur(tek, bol) {
-  return [
+/* kcal isteğe bağlı: bilinmeyen ürünlerde son iki argüman verilmez ve
+   kart üzerinde kalori satırı hiç çizilmez. */
+function porsiyonlarKur(tek, bol, kcalTek, kcalBol) {
+  var porsiyonlar = [
     { etiket: ETIKET_TEK, fiyat: tek },
     { etiket: ETIKET_BOL, fiyat: bol }
   ];
+  if (kcalTek) porsiyonlar[0].kcal = kcalTek;
+  if (kcalBol) porsiyonlar[1].kcal = kcalBol;
+  return porsiyonlar;
 }
 
 var KATEGORILER = [
@@ -40,7 +45,7 @@ var ET_URUNLERI = [
       en: 'Spiced beef tantuni with plenty of vegetables in thin lavash.'
     },
     gorsel: '/images/menu/et-tantuni-durum.webp',
-    porsiyonlar: porsiyonlarKur(330, 460)
+    porsiyonlar: porsiyonlarKur(330, 460, 570, 650)
   },
   {
     id: 'et-ekmek-arasi',
@@ -50,7 +55,7 @@ var ET_URUNLERI = [
       en: 'Spiced beef tantuni with plenty of vegetables in fresh bread.'
     },
     gorsel: '/images/menu/et-tantuni-ekmek-arasi.webp',
-    porsiyonlar: porsiyonlarKur(330, 460)
+    porsiyonlar: porsiyonlarKur(330, 460, 570, 650)
   },
   {
     id: 'et-yogurtlu',
@@ -73,7 +78,7 @@ var TAVUK_URUNLERI = [
       en: 'Chicken tantuni with plenty of vegetables in thin lavash.'
     },
     gorsel: '/images/menu/tavuk-tantuni-durum.webp',
-    porsiyonlar: porsiyonlarKur(240, 330)
+    porsiyonlar: porsiyonlarKur(240, 330, 480, 550)
   },
   {
     id: 'tavuk-ekmek-arasi',
@@ -83,7 +88,7 @@ var TAVUK_URUNLERI = [
       en: 'Chicken tantuni with plenty of vegetables in fresh bread.'
     },
     gorsel: '/images/menu/tavuk-tantuni-ekmek-arasi.webp',
-    porsiyonlar: porsiyonlarKur(240, 330)
+    porsiyonlar: porsiyonlarKur(240, 330, 480, 550)
   },
   {
     id: 'tavuk-yogurtlu',

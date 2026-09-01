@@ -19,7 +19,8 @@ qr/
 ├── konak/index.html        Konak sayfası
 ├── bostanli/index.html     Bostanlı sayfası
 ├── css/qr-menu.css         tüm stiller
-├── kontrol.js              isteğe bağlı veri kontrolü
+├── kontrol.js              veri + sürüm damgası kontrolü
+├── surum.js                önbellek kırıcı ?v= damgasını günceller
 └── js/
     ├── menu-verisi.js      ORTAK: ürünler, fiyatlar, çeviriler
     ├── sube-konak.js       Konak adres/telefon/saat
@@ -41,21 +42,46 @@ görseli değiştirmek her iki sayfaya da anında yansır.
    içeceklerde `fiyat:` alanı.
 3. Fiyat değişim tarihini güncelleyin: dosyanın başındaki
    `FIYAT_DEGISIM_TARIHI`.
-4. İsteğe bağlı ama tavsiye edilir — repo kökünden kontrol edin:
+4. Repo kökünden kontrol edin:
 
    ```
    node qr/kontrol.js
    ```
 
-5. Commit'leyip push'layın:
+   Bayat sürüm damgası varsa uyarır. O zaman:
 
    ```
-   git add qr/js/menu-verisi.js
+   node qr/surum.js
+   ```
+
+5. Commit'leyip push'layın (damga değiştiyse HTML dosyaları da değişmiştir):
+
+   ```
+   git add qr
    git commit -m "Menu: fiyat guncellemesi"
    git push
    ```
 
 Build almanız gerekmez, kopyalanacak çıktı yoktur.
+
+### Neden sürüm damgası var
+
+GitHub Pages dosyaları `Cache-Control: max-age=600` ile servis ediyor ve dosya
+adlarımız hiç değişmiyor. Sayfayı bir kez açmış bir ziyaretçinin tarayıcısı
+`qr-menu.js` ve `qr-menu.css`'i önbellekte tutar — siz fiyatı değiştirip
+yayınlasanız bile o kişi bir süre **eski fiyatı görmeye devam edebilir.**
+
+`node qr/surum.js` her css/js dosyasının içeriğinden kısa bir özet çıkarıp
+HTML'deki bağlantıya `?v=...` olarak yazıyor. İçerik değişince adres de
+değişiyor, tarayıcı dosyayı yeniden indiriyor.
+
+`node qr/kontrol.js` damgaların bayat olup olmadığını da denetler, yani
+unutursanız yakalanır.
+
+**Not:** damga yalnızca css ve js için var. Bir ürün fotoğrafını **aynı adla**
+değiştirirseniz ziyaretçiler bir süre eski fotoğrafı görebilir; yeni fotoğrafa
+farklı bir dosya adı verip `menu-verisi.js` içindeki yolu güncellemek en
+temizi.
 
 ## Şube bilgisi güncelleme
 
@@ -68,6 +94,25 @@ güncelleyin — Google Maps linki oradan kuruluyor.
 Şube adı ya da başlığı değişirse ilgili sayfanın `index.html` dosyasındaki
 `<title>`, `<meta name="description">` ve `<h1>` metinlerini de elle güncelleyin;
 bunlar JavaScript kapalıyken de görünsün diye HTML'e yazılı.
+
+## Kalori bilgisi
+
+Tantuni ürünlerinde porsiyon başına kalori gösterilebilir. `menu-verisi.js`
+içinde `porsiyonlarKur` fonksiyonunun son iki argümanı:
+
+```js
+porsiyonlarKur(330, 460, 570, 650)   // Tek ₺330 ~570 kcal, İçi Bol ₺460 ~650 kcal
+porsiyonlarKur(420, 600)             // kalori bilinmiyor, kart üzerinde hiç çıkmaz
+```
+
+Kalori **isteğe bağlı**: verilmezse kartta kalori satırı çizilmez. Ama
+verilecekse iki porsiyon için de verilmeli — `node qr/kontrol.js` yarım
+girilmiş veriyi ve İçi Bol'un Tek'ten düşük olduğu durumu yakalar.
+
+Ekranda "~570 kcal" biçiminde, fiyattan daha küçük ve sönük görünür. Sayı
+evrensel olduğu için İngilizce modda da aynı kalır, çeviri gerekmez.
+
+İçeceklerde kalori alanı yok.
 
 ## Ürün ekleme
 
@@ -126,9 +171,6 @@ boş çeviriyi yakalar, ama Türkçe metnin İngilizce alanına yapıştırılma
 yalnızca açıklamalarda yakalayabilir (ürün adlarında marka adları yüzünden
 aynı olmak meşru).
 
-Ziyaretçinin tarayıcı dili İngilizce ise sayfa İngilizce açılır; seçim
-tarayıcıda hatırlanır.
-
 ## JavaScript kapalıysa
 
 Menü tarayıcıda çiziliyor, çünkü build adımı olmadan fiyatları tek dosyada
@@ -156,6 +198,14 @@ ve `/qr/konak/` sayfasını açın:
 - [ ] Tema düğmesi karanlık moda geçiriyor
 - [ ] Sayfayı yenileyince dil ve tema seçimi korunuyor
 - [ ] Fiyatlar okunaklı, ürün görselleri yükleniyor
+- [ ] Et/Tavuk Dürüm ve Ekmek Arası ürünlerinde "~570 kcal" gibi kalori görünüyor
+- [ ] Yoğurtlu ürünlerde ve içeceklerde kalori GÖRÜNMÜYOR
+- [ ] Ürün fotoğrafına dokununca büyüyor; X, dışına dokunma ve `Esc` kapatıyor
+
+Bir şey güncellemediği halde eski görünüyorsa **önce sert yenileme yapın**
+(`Ctrl+Shift+R`, telefonda sekmeyi kapatıp açın). Sürüm damgası bunu
+önlüyor ama siz damgayı güncellemeden yayınladıysanız tarayıcı eski dosyayı
+tutuyor olabilir.
 
 `/qr/bostanli/` sayfasında:
 

@@ -64,6 +64,27 @@ tantuniler.forEach(u => {
   );
   bildir(u.porsiyonlar.length === 2, u.id + ' — tam iki porsiyon olmalı');
   u.porsiyonlar.forEach(p => metinGecerli(p.etiket, u.id + ' porsiyon etiketi'));
+
+  /* Kalori isteğe bağlı: hiç olmayabilir, ama varsa iki porsiyonda da
+     olmalı ve İçi Bol daha yüksek olmalı. Yarım girilmiş veri kartta
+     tek porsiyonda kalori gösterip diğerinde göstermez, tuhaf görünür. */
+  const kcalli = u.porsiyonlar.filter(p => p.kcal !== undefined);
+  bildir(
+    kcalli.length === 0 || kcalli.length === 2,
+    u.id + ' — kalori ya iki porsiyonda da olmalı ya hiçbirinde (şu an ' + kcalli.length + ')'
+  );
+  kcalli.forEach(p => {
+    bildir(
+      Number.isInteger(p.kcal) && p.kcal > 0,
+      u.id + ' — geçersiz kalori: ' + p.kcal
+    );
+  });
+  if (kcalli.length === 2) {
+    bildir(
+      u.porsiyonlar[1].kcal > u.porsiyonlar[0].kcal,
+      u.id + ' — İçi Bol porsiyonun kalorisi Tek porsiyondan yüksek olmalı'
+    );
+  }
   bildir(
     u.porsiyonlar[1].fiyat > u.porsiyonlar[0].fiyat,
     u.id + ' — İçi Bol, Tek porsiyondan pahalı olmalı'
@@ -115,6 +136,17 @@ bildir(
     slug + '.telefonTel aranabilir biçimde olmalı (+90XXXXXXXXXX): ' + sube.telefonTel
   );
 });
+
+/* Önbellek kırıcı sürüm damgaları güncel mi?
+   Bayat damga, ziyaretçilerin eski fiyatı görmesi demek. */
+const { surumleriIsle } = require('./surum.js');
+const surum = surumleriIsle(false);
+surum.eksik.forEach(e => bildir(false, 'HTML\'de olmayan dosyaya bağlantı — ' + e));
+bildir(
+  surum.guncellenen.length === 0,
+  'sürüm damgaları bayat (' + surum.guncellenen.length + ' bağlantı). ' +
+  'Düzeltmek için: node qr/surum.js'
+);
 
 if (hata === 0) {
   console.log('Tüm kontroller geçti.');
