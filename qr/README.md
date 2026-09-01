@@ -95,6 +95,25 @@ güncelleyin — Google Maps linki oradan kuruluyor.
 `<title>`, `<meta name="description">` ve `<h1>` metinlerini de elle güncelleyin;
 bunlar JavaScript kapalıyken de görünsün diye HTML'e yazılı.
 
+## Kalori bilgisi
+
+Tantuni ürünlerinde porsiyon başına kalori gösterilebilir. `menu-verisi.js`
+içinde `porsiyonlarKur` fonksiyonunun son iki argümanı:
+
+```js
+porsiyonlarKur(330, 460, 570, 650)   // Tek ₺330 ~570 kcal, İçi Bol ₺460 ~650 kcal
+porsiyonlarKur(420, 600)             // kalori bilinmiyor, kart üzerinde hiç çıkmaz
+```
+
+Kalori **isteğe bağlı**: verilmezse kartta kalori satırı çizilmez. Ama
+verilecekse iki porsiyon için de verilmeli — `node qr/kontrol.js` yarım
+girilmiş veriyi ve İçi Bol'un Tek'ten düşük olduğu durumu yakalar.
+
+Ekranda "~570 kcal" biçiminde, fiyattan daha küçük ve sönük görünür. Sayı
+evrensel olduğu için İngilizce modda da aynı kalır, çeviri gerekmez.
+
+İçeceklerde kalori alanı yok.
+
 ## Ürün ekleme
 
 `menu-verisi.js` içinde ilgili diziye (`ET_URUNLERI`, `TAVUK_URUNLERI` veya
@@ -179,6 +198,8 @@ ve `/qr/konak/` sayfasını açın:
 - [ ] Tema düğmesi karanlık moda geçiriyor
 - [ ] Sayfayı yenileyince dil ve tema seçimi korunuyor
 - [ ] Fiyatlar okunaklı, ürün görselleri yükleniyor
+- [ ] Et/Tavuk Dürüm ve Ekmek Arası ürünlerinde "~570 kcal" gibi kalori görünüyor
+- [ ] Yoğurtlu ürünlerde ve içeceklerde kalori GÖRÜNMÜYOR
 - [ ] Ürün fotoğrafına dokununca büyüyor; X, dışına dokunma ve `Esc` kapatıyor
 
 Bir şey güncellemediği halde eski görünüyorsa **önce sert yenileme yapın**

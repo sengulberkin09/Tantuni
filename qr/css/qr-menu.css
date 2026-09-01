@@ -287,16 +287,31 @@ h1, h2 { font-family: var(--font-baslik); font-weight: 700; line-height: 1.15; m
 
 .porsiyon {
   display: inline-flex;
-  align-items: baseline;
-  gap: 6px;
-  padding: 6px 10px;
+  align-items: center;
+  gap: 8px;
+  padding: 6px 12px;
   background: var(--zemin-yumusak);
   border: 1px solid var(--cizgi);
   border-radius: 999px;
   white-space: nowrap;
 }
 
+/* Etiket ve kalori alt alta. Kalorisi olmayan üründe tek satır kalır,
+   görünüm eskisiyle aynı olur. */
+.porsiyon-metin {
+  display: flex;
+  flex-direction: column;
+  line-height: 1.3;
+}
+
 .porsiyon-etiket { font-size: 11.5px; color: var(--sonuk); }
+
+/* Fiyattan belirgin biçimde geride: daha küçük ve daha sönük. */
+.porsiyon-kcal {
+  font-size: 10.5px;
+  color: var(--sonuk);
+  opacity: 0.8;
+}
 
 .porsiyon-fiyat {
   font-family: var(--font-baslik);

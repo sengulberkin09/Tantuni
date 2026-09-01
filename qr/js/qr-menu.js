@@ -155,7 +155,14 @@
     var porsiyonlar = el('div', 'porsiyonlar');
     urun.porsiyonlar.forEach(function (p) {
       var kutu = el('span', 'porsiyon');
-      kutu.appendChild(metin('span', 'porsiyon-etiket', p.etiket[dil]));
+
+      /* Etiket ve kalori alt alta; fiyat sağda tek başına kalsın. */
+      var sol = el('span', 'porsiyon-metin');
+      sol.appendChild(metin('span', 'porsiyon-etiket', p.etiket[dil]));
+      /* Kalori yalnızca bilinen ürünlerde var; sayı iki dilde de aynı. */
+      if (p.kcal) sol.appendChild(metin('span', 'porsiyon-kcal', '~' + p.kcal + ' kcal'));
+      kutu.appendChild(sol);
+
       kutu.appendChild(metin('span', 'porsiyon-fiyat', fiyatYaz(p.fiyat)));
       porsiyonlar.appendChild(kutu);
     });
